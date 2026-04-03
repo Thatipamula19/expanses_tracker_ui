@@ -1,6 +1,7 @@
 import AppConstants from "@/utils/AppConstants";
 import HoverBtn from "../HoverBtn/HoverBtn";
 import classes from "./header.module.css";
+import { Link, useLocation } from "react-router-dom";
 
 const navItems = [
 	{
@@ -26,6 +27,7 @@ const navItems = [
 ];
 
 const Header = () => {
+	const location = useLocation();
 	return (
 		<nav className={classes?.header_container}>
 			<img src={AppConstants.logos.secondary} alt="logo secondary" className={classes?.header_logo} />
@@ -33,9 +35,11 @@ const Header = () => {
 			<ul className={classes?.nav_items}>
 				{navItems.map((item) => (
 					<li key={item.name} className={classes?.nav_item}>
-						<a href={item.link} className={classes?.nav_link}>
+						<Link
+							to={item.link}
+							className={`${classes?.nav_link} ${location.pathname === item.link ? classes?.active : ""}`}>
 							{item.name}
-						</a>
+						</Link>
 					</li>
 				))}
 			</ul>

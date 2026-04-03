@@ -1,0 +1,35 @@
+.page_cta {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 20px;
+}
+
+.page_title {
+	color: #1e293b;
+	font-size: 24px;
+	font-weight: 500;
+}
+
+.cta_button {
+	background-color: #00b894;
+	color: #fff;
+	padding: 10px 20px;
+	border-radius: 8px;
+	outline: none;
+	border: none;
+	cursor: pointer;
+	font-size: 16px;
+	font-weight: 500;
+	height: 40px;
+	width: 210px;
+	transition: background-color 0.3s ease;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+    gap: 8px;
+
+	&:hover {
+		background-color: #00dca0;
+	}
+}
