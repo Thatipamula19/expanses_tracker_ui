@@ -41,6 +41,7 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	transition: all 0.3s ease;
 }
 
 .signin_forgot {
@@ -88,6 +89,7 @@
 	color: #fff;
 	margin: 0;
 	line-height: 40px;
+	text-align: center;
 }
 
 .signin_signup_desc {
@@ -98,3 +100,142 @@
 	line-height: 20px;
 	text-align: center;
 }
+
+.signin_or_line {
+	display: none;
+}
+
+.dont_have_acc {
+	display: none;
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+	.signin_left {
+		width: 100%;
+		padding: 0;
+	}
+
+	.signin_title {
+		font-size: 28px;
+		margin-bottom: 18px;
+		line-height: 35px;
+	}
+
+	.signin_google {
+		width: 35px;
+		height: 35px;
+		margin-bottom: 18px;
+	}
+
+	.signin_forgot {
+		font-size: 12px;
+		align-self: flex-end;
+	}
+
+	.signin_right {
+		display: none;
+	}
+
+	.signin_or_line {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 10px;
+		margin-bottom: 20px;
+		width: 100%;
+		margin-block: 10px;
+
+		hr {
+			width: 40%;
+			height: 1px;
+			background-color: #e0e0e0;
+			border: none;
+		}
+	}
+
+	.dont_have_acc {
+		display: block;
+		font-size: 12px;
+		font-weight: 400;
+		color: #999999;
+		margin-bottom: 20px;
+		line-height: 20px;
+		text-align: center;
+	}
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+	.signin_left {
+		width: 100%;
+		padding: 0;
+	}
+
+	.signin_title {
+		font-size: 28px;
+		margin-bottom: 18px;
+		line-height: 35px;
+	}
+
+	.signin_google {
+		width: 35px;
+		height: 35px;
+		margin-bottom: 18px;
+	}
+
+	.signin_forgot {
+		font-size: 12px;
+		align-self: flex-end;
+	}
+
+	.signin_right {
+		display: none;
+	}
+
+	.signin_or_line {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 10px;
+		margin-bottom: 20px;
+		width: 100%;
+		margin-block: 10px;
+
+		hr {
+			width: 40%;
+			height: 1px;
+			background-color: #e0e0e0;
+			border: none;
+		}
+	}
+
+	.dont_have_acc {
+		display: block;
+		font-size: 12px;
+		font-weight: 400;
+		color: #999999;
+		margin-bottom: 20px;
+		line-height: 20px;
+		text-align: center;
+	}
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+	.signin_left {
+		width: 60%;
+		padding: 0;
+	}
+
+	.signin_or_line {
+		display: none;
+	}
+
+	.dont_have_acc {
+		display: none;
+	}
+}
+
+/* @media (min-width: 992px) and (max-width: 1199px) {
+}
+
+@media (min-width: 1200px) {
+} */

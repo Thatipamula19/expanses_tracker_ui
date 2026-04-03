@@ -1,0 +1,9 @@
+.hover_btn {
+	border: none;
+	background-color: transparent;
+	cursor: pointer;
+	outline: none;
+	width: 40px;
+	height: 40px;
+	transition: all 0.3s ease-in-out;
+}

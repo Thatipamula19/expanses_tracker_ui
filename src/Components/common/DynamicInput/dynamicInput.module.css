@@ -1,3 +1,9 @@
+.error_input_box {
+	display: flex;
+	flex-direction: column;
+	gap: 3px;
+	margin-bottom: 20px;
+}
 .dynamic_input_wrapper {
 	display: flex;
 	align-items: center;
@@ -7,8 +13,16 @@
 	height: 50px;
 	border-radius: 4px;
 	border: 1px solid #e0e0e0;
-	margin-bottom: 20px;
 	padding: 0 10px;
+	transition: all 0.3s ease;
+
+	&:hover {
+		border-color: #007bff;
+	}
+}
+
+.error {
+	border-color: #ef4444;
 }
 
 .icon_left {
@@ -19,7 +33,7 @@
 	width: 24px;
 	height: 24px;
 	cursor: pointer;
-    transition: all 0.3s ease;
+	transition: all 0.3s ease;
 }
 
 .dynamic_input {
@@ -32,3 +46,61 @@
 	font-weight: 400;
 	color: #64748b;
 }
+
+.error_message {
+	font-size: 10px;
+	font-weight: 400;
+	color: #ef4444;
+	display: flex;
+	align-items: center;
+	gap: 2px;
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+	.dynamic_input_wrapper {
+		width: 280px;
+		height: 45px;
+	}
+
+	.icon_left {
+		width: 16px;
+		height: 16px;
+	}
+	.icon_right {
+		width: 20px;
+		height: 20px;
+	}
+
+	.dynamic_input {
+		font-size: 15px;
+	}
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+	.dynamic_input_wrapper {
+		width: 280px;
+		height: 45px;
+	}
+
+	.icon_left {
+		width: 16px;
+		height: 16px;
+	}
+	.icon_right {
+		width: 20px;
+		height: 20px;
+	}
+
+	.dynamic_input {
+		font-size: 15px;
+	}
+}
+
+/* @media (min-width: 768px) and (max-width: 991px) {
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+}
+
+@media (min-width: 1200px) {
+} */

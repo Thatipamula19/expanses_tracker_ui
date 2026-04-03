@@ -14,5 +14,36 @@
 	display: flex;
 	width: 60%;
 	max-width: 800px;
-	/* height: 600px; */
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+	.auth_layout_content {
+		width: 90%;
+		max-width: 380px;
+	}
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+	.auth_layout_content {
+		width: 80%;
+		max-width: 380px;
+	}
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+	.auth_layout_content {
+		width: 90%;
+	}
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+	.auth_layout_content {
+		width: 70%;
+	}
+}
+
+@media (min-width: 1199px) {
+	.auth_layout_content {
+		width: 60%;
+	}
 }
