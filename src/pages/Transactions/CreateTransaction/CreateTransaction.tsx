@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import type { Transaction } from "@/types/transactions";
 
 const CreateTransaction = ({
-	open,
+	// open,
 	setOpen,
 	type,
 	transaction,
@@ -19,7 +19,7 @@ const CreateTransaction = ({
 	const {
 		register,
 		handleSubmit,
-		formState: { isValid, errors },
+		// formState: { isValid, errors },
 		// setValue,
 		reset,
 	} = useForm<Transaction>();

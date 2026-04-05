@@ -1,9 +1,9 @@
-import AppConstants from "@/utils/AppConstants";
-import classes from "./table.module.css";
-import { useState } from "react";
-import CreateTransaction from "@/pages/Transactions/CreateTransaction/CreateTransaction";
+import DeleteItem from "@/Components/common/Modal/DeleteItem/DeleteItem";
 import type { Transaction } from "@/types/transactions";
-import DeleteTransaction from "@/pages/Transactions/DeleteTransaction/DeleteTransaction";
+import AppConstants from "@/utils/AppConstants";
+import { useState } from "react";
+import CreateTransaction from "../CreateTransaction/CreateTransaction";
+import classes from "./table.module.css";
 
 const transactions = [
 	{
@@ -104,6 +104,10 @@ const Table = () => {
 		setDeleteOpen(true);
 	};
 
+	const handleDeleteTransaction = () => {
+		console.log(transaction);
+	};
+
 	return (
 		<div className={classes?.table_container}>
 			<table className={classes?.table}>
@@ -173,7 +177,14 @@ const Table = () => {
 				</tbody>
 			</table>
 			{open && <CreateTransaction open={open} setOpen={setOpen} type="Edit" transaction={transaction} />}
-			{deleteOpen && <DeleteTransaction setOpen={setDeleteOpen} id={transaction.id} />}
+			{deleteOpen && (
+				<DeleteItem
+					title="Delete Transaction?"
+					description="Are you sure you want to delete this transaction?"
+					setOpen={setDeleteOpen}
+					onDelete={handleDeleteTransaction}
+				/>
+			)}
 		</div>
 	);
 };

@@ -3,12 +3,96 @@ import Footer from "@/Components/common/Footer/Footer";
 import Header from "@/Components/common/Header/Header";
 import PageTitleCTA from "@/Components/common/PageTitleCTA/PageTitleCTA";
 import Pagination from "@/Components/common/Pagination/Pagination";
-import Table from "@/Components/common/Table/Table";
-import { useState } from "react";
-import CreateTransaction from "./CreateTransaction/CreateTransaction";
-import classes from "./transaction.module.css";
 import useTransactionsStore from "@/store/useTransactionsStore";
 import AppConstants from "@/utils/AppConstants";
+import { useState } from "react";
+import CreateTransaction from "./CreateTransaction/CreateTransaction";
+import Table from "./Table/Table";
+import classes from "./transaction.module.css";
+
+// const transactionsData = [
+// 	{
+// 		id: "1",
+// 		title: "Thumbs Up",
+// 		date: "15 Oct 2025",
+// 		category: "food",
+// 		description: "Description",
+// 		amount: 300.0,
+// 		type: "expense",
+// 	},
+// 	{
+// 		id: "2",
+// 		title: "Salary",
+// 		date: "18 Oct 2025",
+// 		category: "salary",
+// 		description: "Description",
+// 		amount: 1000.0,
+// 		type: "income",
+// 	},
+// 	{
+// 		id: "3",
+// 		title: "Rent",
+// 		date: "15 Oct 2025",
+// 		category: "bills",
+// 		description: "Description",
+// 		amount: 1000.0,
+// 		type: "expense",
+// 	},
+// 	{
+// 		id: "4",
+// 		title: "Gas",
+// 		date: "15 Oct 2025",
+// 		category: "bills",
+// 		description: "Description",
+// 		amount: 100.0,
+// 		type: "expense",
+// 	},
+// 	{
+// 		id: "5",
+// 		title: "Electricity",
+// 		date: "15 Oct 2025",
+// 		category: "bills",
+// 		description: "Description",
+// 		amount: 100.0,
+// 		type: "expense",
+// 	},
+// 	{
+// 		id: "6",
+// 		title: "Internet",
+// 		date: "15 Oct 2025",
+// 		category: "bills",
+// 		description: "Description",
+// 		amount: 100.0,
+// 		type: "expense",
+// 	},
+// 	{
+// 		id: "7",
+// 		title: "Netflix",
+// 		date: "15 Oct 2025",
+// 		category: "entertainment",
+// 		description: "Description",
+// 		amount: 100.0,
+// 		type: "expense",
+// 	},
+// 	{
+// 		id: "8",
+// 		title: "books",
+// 		date: "15 Oct 2025",
+// 		category: "education",
+// 		description: "Description",
+// 		amount: 100.0,
+// 		type: "expense",
+// 	},
+// 	{
+// 		id: "9",
+// 		title: "Other",
+// 		date: "15 Oct 2025",
+// 		category: "other",
+// 		description: "Description",
+// 		amount: 100.0,
+// 		type: "expense",
+// 	},
+// ];
 
 const Transactions = () => {
 	const {
@@ -16,8 +100,8 @@ const Transactions = () => {
 		category,
 		transactionType,
 		sort,
-		transactions,
-		setTransactions,
+		// transactions,
+		// setTransactions,
 		setDate,
 		setCategory,
 		setTransactionType,
