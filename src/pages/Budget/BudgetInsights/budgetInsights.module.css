@@ -1,0 +1,45 @@
+.budget_insights_sec {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	padding: 20px 0;
+}
+
+.title {
+	font-weight: 600;
+	font-size: 20px;
+	color: #1e293b;
+	margin: 0;
+}
+
+.cards {
+	display: flex;
+	align-items: center;
+	gap: 20px;
+}
+
+.card {
+    flex: 1;
+	box-shadow: 0px 8px 30px 0px #0206170f;
+	background-color: #fff;
+	padding: 20px;
+	border-radius: 12px;
+}
+
+.card_header {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 20px;
+
+	strong {
+		font-size: 16px;
+		font-weight: 600;
+		color: #1e293b;
+	}
+
+	span {
+		font-size: 12px;
+		font-weight: 400;
+		color: #64748b;
+	}
+}

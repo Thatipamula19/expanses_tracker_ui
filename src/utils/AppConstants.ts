@@ -312,6 +312,46 @@ const AppConstants = Object.freeze({
 			],
 		},
 	},
+	goalsFilters: {
+		status: {
+			name: "Status",
+			options: [
+				{
+					label: "All",
+					value: "all",
+				},
+				{
+					label: "Ongoing",
+					value: "ongoing",
+				},
+				{
+					label: "Completed",
+					value: "completed",
+				},
+			],
+		},
+		timePeriod: {
+			name: "Time Period",
+			options: [
+				{
+					label: "Weekly",
+					value: "weekly",
+				},
+				{
+					label: "Monthly",
+					value: "monthly",
+				},
+				{
+					label: "Quarterly",
+					value: "quarterly",
+				},
+				{
+					label: "Yearly",
+					value: "yearly",
+				},
+			],
+		},
+	},
 });
 
 export default AppConstants;

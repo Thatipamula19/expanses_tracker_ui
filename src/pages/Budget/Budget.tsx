@@ -5,11 +5,12 @@ import PageTitleCTA from "@/Components/common/PageTitleCTA/PageTitleCTA";
 import Pagination from "@/Components/common/Pagination/Pagination";
 import useBudgetStore from "@/store/useBudgetStore";
 import AppConstants from "@/utils/AppConstants";
+import { useState } from "react";
 import classes from "./budget.module.css";
+import BudgetInsights from "./BudgetInsights/BudgetInsights";
+import CreateBudget from "./CreateBudget/CreateBudget";
 import Stats from "./Stats/Stats";
 import Table from "./Table/Table";
-import { useState } from "react";
-import CreateBudget from "./CreateBudget/CreateBudget";
 
 const statsData = [
 	{
@@ -98,6 +99,7 @@ const Budget = () => {
 				<Stats statsData={statsData} />
 				<Table data={budgetData} />
 				<Pagination total={3} currentPage={1} onChangePage={() => {}} />
+				<BudgetInsights />
 			</main>
 			{open && <CreateBudget open={open} setOpen={setOpen} type="Add" />}
 			<Footer />
