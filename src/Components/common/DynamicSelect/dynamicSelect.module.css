@@ -9,14 +9,10 @@
 	height: 44px;
 	cursor: pointer;
 	transition: all 0.3s ease;
+}
 
-	&:hover > .opt_list {
-		display: block;
-	}
-
-	&:hover > .select_content img {
-		transform: rotate(180deg);
-	}
+.rotate {
+	transform: rotate(180deg);
 }
 
 .select_content {
@@ -39,7 +35,6 @@
 }
 
 .opt_list {
-	display: none;
 	position: absolute;
 	list-style-type: none;
 	padding: 0;
@@ -74,6 +69,10 @@
 	font-weight: 400;
 
 	&:hover {
+		background-color: #e2e8f0;
+	}
+
+	&.active {
 		background-color: #e2e8f0;
 	}
 }

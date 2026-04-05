@@ -4,6 +4,7 @@ const Input = ({
 	type,
 	placeholder,
 	halfWidth = false,
+	...restProps
 }: {
 	type: string;
 	placeholder: string;
@@ -11,11 +12,11 @@ const Input = ({
 }) => {
 	const renderInput = () => {
 		if (type === "textarea") {
-			return <Textarea placeholder={placeholder} />;
+			return <Textarea placeholder={placeholder} {...restProps} />;
 		} else if (type === "select") {
-			return <Select placeholder={placeholder} />;
+			return <Select placeholder={placeholder} {...restProps} />;
 		}
-		return <PlainInput type={type} placeholder={placeholder} />;
+		return <PlainInput type={type} placeholder={placeholder} {...restProps} />;
 	};
 
 	return (
@@ -27,17 +28,17 @@ const Input = ({
 
 export default Input;
 
-const PlainInput = ({ type, placeholder }: { type: string; placeholder: string }) => {
-	return <input type={type} placeholder={placeholder} className={classes?.input} />;
+const PlainInput = ({ type, placeholder, ...restProps }: { type: string; placeholder: string }) => {
+	return <input type={type} placeholder={placeholder} className={classes?.input} {...restProps} />;
 };
 
-const Textarea = ({ placeholder }: { placeholder: string }) => {
-	return <textarea rows={2} placeholder={placeholder} className={classes?.textarea} />;
+const Textarea = ({ placeholder, ...restProps }: { placeholder: string }) => {
+	return <textarea rows={2} placeholder={placeholder} className={classes?.textarea} {...restProps} />;
 };
 
-const Select = ({ placeholder }: { placeholder: string }) => {
+const Select = ({ placeholder, ...restProps }: { placeholder: string }) => {
 	return (
-		<select className={classes?.input}>
+		<select className={classes?.input} {...restProps}>
 			<option value="" disabled selected>
 				{placeholder}
 			</option>

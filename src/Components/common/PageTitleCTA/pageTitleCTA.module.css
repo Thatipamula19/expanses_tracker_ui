@@ -9,6 +9,15 @@
 	color: #1e293b;
 	font-size: 24px;
 	font-weight: 500;
+	line-height: 30px;
+	margin: 0;
+	margin-bottom: 8px;
+}
+
+.page_subtitle {
+	color: #64748b;
+	font-size: 14px;
+	font-weight: 400;
 }
 
 .cta_button {
@@ -27,7 +36,7 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-    gap: 8px;
+	gap: 8px;
 
 	&:hover {
 		background-color: #00dca0;

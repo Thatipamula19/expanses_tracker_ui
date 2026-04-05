@@ -80,6 +80,125 @@ const AppConstants = Object.freeze({
 		shopping: "Shopping",
 		salary: "Salary",
 	},
+
+	transactionFilters: {
+		date: {
+			name: "Date",
+			options: [
+				{
+					label: "This Month",
+					value: "thisMonth",
+				},
+				{
+					label: "Today",
+					value: "today",
+				},
+				{
+					label: "Last Month",
+					value: "lastMonth",
+				},
+				{
+					label: "This Week",
+					value: "thisWeek",
+				},
+				{
+					label: "Last Week",
+					value: "lastWeek",
+				},
+				{
+					label: "Last 3 Months",
+					value: "last3Months",
+				},
+			],
+		},
+		category: {
+			name: "Category",
+			options: [
+				{
+					label: "All Category",
+					value: "all",
+				},
+				{
+					label: "Food & Dining",
+					value: "foodDining",
+				},
+				{
+					label: "Transportation",
+					value: "transportation",
+				},
+				{
+					label: "Expense",
+					value: "expense",
+				},
+				{
+					label: "Entertainment",
+					value: "entertainment",
+				},
+				{
+					label: "Health & Fitness",
+					value: "healthFitness",
+				},
+				{
+					label: "Education",
+					value: "education",
+				},
+				{
+					label: "Bills & Utilities",
+					value: "billsUtilities",
+				},
+				{
+					label: "Investment",
+					value: "investment",
+				},
+				{
+					label: "Freelance Work",
+					value: "freelanceWork",
+				},
+				{
+					label: "Savings Account",
+					value: "savingsAccount",
+				},
+				{
+					label: "Shopping",
+					value: "shopping",
+				},
+				{
+					label: "Salary",
+					value: "salary",
+				},
+			],
+		},
+		transactionType: {
+			name: "Transaction Type",
+			options: [
+				{
+					label: "All Transaction Type",
+					value: "all",
+				},
+				{
+					label: "Income",
+					value: "income",
+				},
+				{
+					label: "Expense",
+					value: "expense",
+				},
+			],
+		},
+		sort: {
+			name: "Sorting",
+			options: [
+				{
+					label: "Newest First",
+					value: "newestFirst",
+				},
+				{
+					label: "Oldest First",
+					value: "oldestFirst",
+				},
+			],
+		},
+	},
 });
 
 export default AppConstants;
