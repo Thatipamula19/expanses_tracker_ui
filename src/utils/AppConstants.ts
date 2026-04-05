@@ -199,6 +199,119 @@ const AppConstants = Object.freeze({
 			],
 		},
 	},
+
+	budgetFilters: {
+		date: {
+			name: "Date",
+			options: [
+				{
+					label: "Jan 2026",
+					value: "jan2026",
+				},
+				{
+					label: "Feb 2026",
+					value: "feb2026",
+				},
+				{
+					label: "Mar 2026",
+					value: "mar2026",
+				},
+				{
+					label: "Apr 2026",
+					value: "apr2026",
+				},
+				{
+					label: "May 2026",
+					value: "may2026",
+				},
+				{
+					label: "Jun 2026",
+					value: "jun2026",
+				},
+				{
+					label: "Jul 2026",
+					value: "jul2026",
+				},
+				{
+					label: "Aug 2026",
+					value: "aug2026",
+				},
+				{
+					label: "Sep 2026",
+					value: "sep2026",
+				},
+				{
+					label: "Oct 2026",
+					value: "oct2026",
+				},
+				{
+					label: "Nov 2026",
+					value: "nov2026",
+				},
+				{
+					label: "Dec 2026",
+					value: "dec2026",
+				},
+			],
+		},
+		category: {
+			name: "Category",
+			options: [
+				{
+					label: "All Category",
+					value: "all",
+				},
+				{
+					label: "Food & Dining",
+					value: "foodDining",
+				},
+				{
+					label: "Transportation",
+					value: "transportation",
+				},
+				{
+					label: "Expense",
+					value: "expense",
+				},
+				{
+					label: "Entertainment",
+					value: "entertainment",
+				},
+				{
+					label: "Health & Fitness",
+					value: "healthFitness",
+				},
+				{
+					label: "Education",
+					value: "education",
+				},
+				{
+					label: "Bills & Utilities",
+					value: "billsUtilities",
+				},
+				{
+					label: "Investment",
+					value: "investment",
+				},
+				{
+					label: "Freelance Work",
+					value: "freelanceWork",
+				},
+				{
+					label: "Savings Account",
+					value: "savingsAccount",
+				},
+				{
+					label: "Shopping",
+					value: "shopping",
+				},
+				{
+					label: "Salary",
+					value: "salary",
+				},
+			],
+		},
+	},
 });
 
 export default AppConstants;

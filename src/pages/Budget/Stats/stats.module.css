@@ -1,0 +1,69 @@
+.stats_sec {
+	margin-block: 20px;
+	display: flex;
+	align-items: center;
+	gap: 25px;
+}
+
+.stats_item {
+	width: 250px;
+	height: 100px;
+	border-radius: 12px;
+	padding: 16px;
+	box-shadow: 0px 6px 18px 0px #0206170f;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	border: 1px solid #f0f3f6;
+	gap: 10px;
+}
+
+.title {
+	font-size: 12px;
+	font-weight: 400;
+	color: #64748b;
+}
+
+.value {
+	font-size: 28px;
+	font-weight: 500;
+	color: #1e293b;
+}
+
+.desc {
+	font-size: 12px;
+	font-weight: 400;
+	color: #22c55e;
+	margin: 0;
+}
+
+.spent_desc {
+	font-size: 12px;
+	font-weight: 400;
+	color: #ef4444;
+	margin: 0;
+}
+
+.progress_bar {
+	width: 100%;
+	height: 12px;
+	border-radius: 6px;
+	background-color: #e5e7eb;
+	position: relative;
+}
+
+.used_text {
+	position: absolute;
+	right: 10px;
+	font-size: 8px;
+	font-weight: 400;
+	color: #64748b;
+}
+
+.progress_bar_fill {
+	position: absolute;
+	left: 0;
+	height: 100%;
+	background-color: #00b894;
+	border-radius: 6px;
+}

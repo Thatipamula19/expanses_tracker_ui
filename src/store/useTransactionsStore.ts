@@ -19,5 +19,3 @@ const useTransactionsStore = create<TransactionsStore>((set) => ({
 }));
 
 export default useTransactionsStore;
-
-export type { TransactionsStore };
