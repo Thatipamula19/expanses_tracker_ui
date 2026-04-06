@@ -32,7 +32,6 @@ const Signin = () => {
 	};
 
 	const handleSignin = async (data: SignInFormTypes) => {
-		console.log(data);
 		mutate(data);
 	};
 
@@ -40,11 +39,18 @@ const Signin = () => {
 		mutationFn: (data: SignInFormTypes) => login(data),
 
 		onSuccess: (data) => {
-			console.log(data);
-			setCookies("token", data.token, 10);
+			setCookies("token", data?.access_token || "", 10);
+			setCookies("refresh_token", data?.refresh_token || "", 10);
 			setAuthenticated(true);
-			setUser(data.user);
-			// navigate("/");
+			const user = {
+				id: data?.user_id,
+				email: data?.email,
+				name: data?.user_name,
+				role: data?.user_role,
+			}
+			setUser(user);
+			setCookies("user_info", JSON.stringify(user), 10);
+			navigate("/");
 		},
 
 		onError: (error) => {
