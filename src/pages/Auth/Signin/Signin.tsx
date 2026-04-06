@@ -8,8 +8,15 @@ import DynamicInput from "@/Components/common/DynamicInput/DynamicInput";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import type { SignInFormTypes } from "@/types/auth";
+import { useMutation } from "@tanstack/react-query";
+import { login } from "@/services/userServices";
+import { setCookies } from "@/utils/auth";
+import { useNavigate } from "react-router-dom";
+import useAuthStore from "@/store/useAuthStore";
 
 const Signin = () => {
+	const navigate = useNavigate();
+	const {setUser, setAuthenticated} = useAuthStore()
 	const {
 		register,
 		handleSubmit,
@@ -26,12 +33,29 @@ const Signin = () => {
 
 	const handleSignin = async (data: SignInFormTypes) => {
 		console.log(data);
+		mutate(data);
 	};
+
+	const { mutate, isPending } = useMutation({
+		mutationFn: (data: SignInFormTypes) => login(data),
+
+		onSuccess: (data) => {
+			console.log(data);
+			setCookies("token", data.token, 10);
+			setAuthenticated(true);
+			setUser(data.user);
+			// navigate("/");
+		},
+
+		onError: (error) => {
+			console.log(error);
+		},
+	});
 
 	const getIsValid = () => {
 		const email = watch("email");
 		const password = watch("password");
-		if (email && password && isValid) return true;
+		if (email && password && isValid && !isPending) return true;
 		else return false;
 	};
 
@@ -67,17 +91,17 @@ const Signin = () => {
 						name="password"
 						rules={{
 							required: true,
-							pattern: {
-								value: /^[a-zA-Z0-9_]+$/,
-								message: "password must contain only letters, numbers, and underscores",
-							},
+							// pattern: {
+							// 	value: /^[a-zA-Z0-9_]+$/,
+							// 	message: "password must contain only letters, numbers, and underscores",
+							// },
 							minLength: {
 								value: 6,
 								message: "password must be at least 6 characters long",
 							},
 							maxLength: {
-								value: 12,
-								message: "password must be at most 12 characters long",
+								value: 15,
+								message: "password must be at most 15 characters long",
 							},
 						}}
 						error={errors.password ? errors.password?.message : ""}
@@ -85,7 +109,7 @@ const Signin = () => {
 					<a href="/forgot-password" className={classes?.signin_forgot}>
 						Forgot your password?
 					</a>
-					<AuthButton name="SIGN IN" type="submit" disabled={!getIsValid()} />
+					<AuthButton name="SIGN IN" type="submit" disabled={!getIsValid()} loading={isPending} />
 					<div className={classes?.signin_or_line}>
 						<hr /> <span>OR</span> <hr />
 					</div>
@@ -102,7 +126,7 @@ const Signin = () => {
 				<div className={classes?.signin_signup}>
 					<strong className={classes?.signin_signup_title}>Hello, Friend!</strong>
 					<p className={classes?.signin_signup_desc}>Enter your personal details and start journey with us</p>
-					<AuthButton name="SIGN UP" type="button" clickHandler={handleClickSignup} />
+					<AuthButton name="SIGN UP" type="button" clickHandler={handleClickSignup}  />
 				</div>
 			</div>
 		</AuthLayout>

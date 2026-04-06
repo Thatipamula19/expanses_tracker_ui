@@ -2,12 +2,14 @@ import googleIcon from "@/assets/authIcons/google.svg";
 import logoLight from "@/assets/logos/logo_light.svg";
 import AuthButton from "@/Components/common/AuthButton/AuthButton";
 import DynamicInput from "@/Components/common/DynamicInput/DynamicInput";
+import type { SignUpFormTypes } from "@/types/auth";
 import AppConstants from "@/utils/AppConstants";
+import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
 import AuthLayout from "../AuthLayout/AuthLayout";
 import classes from "./signup.module.css";
-import { useForm } from "react-hook-form";
-import type { SignUpFormTypes } from "@/types/auth";
+import { signup } from "@/services/userServices";
 
 const Signup = () => {
 	const {
@@ -27,10 +29,22 @@ const Signup = () => {
 
 	const handleSignup = async (data: SignUpFormTypes) => {
 		console.log(data);
+		delete data.confirmPassword;
+		mutate(data);
 	};
 
+	const { mutate, isPending } = useMutation({
+		mutationFn: (data: SignUpFormTypes) => signup(data),
+		onSuccess: (data) => {
+			console.log(data);
+		},
+		onError: (error) => {
+			console.log(error);
+		},
+	});
+
 	const getIsValid = () => {
-		const name = watch("name");
+		const name = watch("user_name");
 		const email = watch("email");
 		const password = watch("password");
 		const confirmPassword = watch("confirmPassword");
@@ -57,7 +71,7 @@ const Signup = () => {
 						placeholder="Name"
 						type="text"
 						register={register}
-						name="name"
+						name="user_name"
 						rules={{
 							required: true,
 							pattern: {
@@ -69,7 +83,7 @@ const Signup = () => {
 								message: "please enter at least 3 characters",
 							},
 						}}
-						error={errors.name ? errors.name?.message : ""}
+						error={errors.user_name ? errors.user_name?.message : ""}
 					/>
 					<DynamicInput
 						iconLeft={email}
@@ -97,16 +111,16 @@ const Signup = () => {
 						rules={{
 							required: true,
 							pattern: {
-								value: /^[a-zA-Z0-9_]+$/,
-								message: "password must contain only letters, numbers, and underscores",
+								value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{6,15}$/,
+								message: "must include uppercase, lowercase, number and special character",
 							},
 							minLength: {
 								value: 6,
 								message: "password must be at least 6 characters long",
 							},
 							maxLength: {
-								value: 12,
-								message: "password must be at most 12 characters long",
+								value: 15,
+								message: "password must be at most 15 characters long",
 							},
 						}}
 						error={errors.password ? errors.password?.message : ""}
@@ -125,7 +139,7 @@ const Signup = () => {
 						}}
 						error={errors.confirmPassword?.message || ""}
 					/>
-					<AuthButton name="SIGN UP" type="submit" disabled={!getIsValid()} />
+					<AuthButton name="SIGN UP" type="submit" disabled={!getIsValid()} loading={isPending} />
 					<div className={classes?.signup_or_line}>
 						<hr /> <span>OR</span> <hr />
 					</div>
