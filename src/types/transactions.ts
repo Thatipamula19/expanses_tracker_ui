@@ -27,10 +27,16 @@ export type TransactionsStore = {
 	category: FilterType;
 	transactionType: FilterType;
 	sort: FilterType;
+	pagination: {
+		current: number;
+		pageSize: number;
+		total: number;
+	};
 
 	setTransactions: (transactions: Transaction[]) => void;
 	setDate: (date: FilterType) => void;
 	setCategory: (category: FilterType) => void;
 	setTransactionType: (transactionType: FilterType) => void;
 	setSort: (sort: FilterType) => void;
+	setPagination: (pagination: TransactionsStore["pagination"]) => void;
 };

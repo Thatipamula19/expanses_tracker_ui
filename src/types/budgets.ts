@@ -22,7 +22,14 @@ export type BudgetStore = {
 	budgets: Budget[];
 	date: FilterType;
 	category: FilterType;
+	pagination: {
+		current: number;
+		pageSize: number;
+		total: number;
+	};
+
 	setDate: (date: FilterType) => void;
 	setCategory: (category: FilterType) => void;
 	setBudgets: (budgets: Budget[]) => void;
+	setPagination: (pagination: BudgetStore["pagination"]) => void;
 };

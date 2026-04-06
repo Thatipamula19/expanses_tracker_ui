@@ -10,12 +10,18 @@ const useTransactionsStore = create<TransactionsStore>((set) => ({
 	category: category?.options?.[0],
 	transactionType: transactionType?.options?.[0] || "",
 	sort: sort?.options?.[0] || "",
+	pagination: {
+		current: 1,
+		pageSize: 10,
+		total: 3,
+	},
 
 	setTransactions: (transactions) => set({ transactions }),
 	setDate: (date) => set({ date }),
 	setCategory: (category) => set({ category }),
 	setTransactionType: (transactionType) => set({ transactionType }),
 	setSort: (sort) => set({ sort }),
+	setPagination: (pagination) => set({ pagination }),
 }));
 
 export default useTransactionsStore;

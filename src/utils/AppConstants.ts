@@ -352,6 +352,86 @@ const AppConstants = Object.freeze({
 			],
 		},
 	},
+	reportsFilters: {
+		category: {
+			name: "Category",
+			options: [
+				{
+					label: "All Category",
+					value: "all",
+				},
+				{
+					label: "Food & Dining",
+					value: "foodDining",
+				},
+				{
+					label: "Transportation",
+					value: "transportation",
+				},
+				{
+					label: "Expense",
+					value: "expense",
+				},
+				{
+					label: "Entertainment",
+					value: "entertainment",
+				},
+				{
+					label: "Health & Fitness",
+					value: "healthFitness",
+				},
+				{
+					label: "Education",
+					value: "education",
+				},
+				{
+					label: "Bills & Utilities",
+					value: "billsUtilities",
+				},
+				{
+					label: "Investment",
+					value: "investment",
+				},
+				{
+					label: "Freelance Work",
+					value: "freelanceWork",
+				},
+				{
+					label: "Savings Account",
+					value: "savingsAccount",
+				},
+				{
+					label: "Shopping",
+					value: "shopping",
+				},
+				{
+					label: "Salary",
+					value: "salary",
+				},
+			],
+		},
+		timePeriod: {
+			name: "Time Period",
+			options: [
+				{
+					label: "Weekly",
+					value: "weekly",
+				},
+				{
+					label: "Monthly",
+					value: "monthly",
+				},
+				{
+					label: "Quarterly",
+					value: "quarterly",
+				},
+				{
+					label: "Yearly",
+					value: "yearly",
+				},
+			],
+		},
+	},
 });
 
 export default AppConstants;

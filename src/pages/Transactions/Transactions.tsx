@@ -10,90 +10,6 @@ import CreateTransaction from "./CreateTransaction/CreateTransaction";
 import Table from "./Table/Table";
 import classes from "./transaction.module.css";
 
-// const transactionsData = [
-// 	{
-// 		id: "1",
-// 		title: "Thumbs Up",
-// 		date: "15 Oct 2025",
-// 		category: "food",
-// 		description: "Description",
-// 		amount: 300.0,
-// 		type: "expense",
-// 	},
-// 	{
-// 		id: "2",
-// 		title: "Salary",
-// 		date: "18 Oct 2025",
-// 		category: "salary",
-// 		description: "Description",
-// 		amount: 1000.0,
-// 		type: "income",
-// 	},
-// 	{
-// 		id: "3",
-// 		title: "Rent",
-// 		date: "15 Oct 2025",
-// 		category: "bills",
-// 		description: "Description",
-// 		amount: 1000.0,
-// 		type: "expense",
-// 	},
-// 	{
-// 		id: "4",
-// 		title: "Gas",
-// 		date: "15 Oct 2025",
-// 		category: "bills",
-// 		description: "Description",
-// 		amount: 100.0,
-// 		type: "expense",
-// 	},
-// 	{
-// 		id: "5",
-// 		title: "Electricity",
-// 		date: "15 Oct 2025",
-// 		category: "bills",
-// 		description: "Description",
-// 		amount: 100.0,
-// 		type: "expense",
-// 	},
-// 	{
-// 		id: "6",
-// 		title: "Internet",
-// 		date: "15 Oct 2025",
-// 		category: "bills",
-// 		description: "Description",
-// 		amount: 100.0,
-// 		type: "expense",
-// 	},
-// 	{
-// 		id: "7",
-// 		title: "Netflix",
-// 		date: "15 Oct 2025",
-// 		category: "entertainment",
-// 		description: "Description",
-// 		amount: 100.0,
-// 		type: "expense",
-// 	},
-// 	{
-// 		id: "8",
-// 		title: "books",
-// 		date: "15 Oct 2025",
-// 		category: "education",
-// 		description: "Description",
-// 		amount: 100.0,
-// 		type: "expense",
-// 	},
-// 	{
-// 		id: "9",
-// 		title: "Other",
-// 		date: "15 Oct 2025",
-// 		category: "other",
-// 		description: "Description",
-// 		amount: 100.0,
-// 		type: "expense",
-// 	},
-// ];
-
 const Transactions = () => {
 	const {
 		date,
@@ -102,6 +18,8 @@ const Transactions = () => {
 		sort,
 		// transactions,
 		// setTransactions,
+		pagination,
+		setPagination,
 		setDate,
 		setCategory,
 		setTransactionType,
@@ -152,7 +70,11 @@ const Transactions = () => {
 				/>
 				<Filter filters={filters} />
 				<Table />
-				<Pagination total={4} currentPage={1} onChangePage={() => {}} />
+				<Pagination
+					total={pagination?.total}
+					currentPage={pagination?.current}
+					onChangePage={(page) => setPagination({ ...pagination, current: page })}
+				/>
 			</main>
 			{open && <CreateTransaction open={open} setOpen={setOpen} type="Add" />}
 			<Footer />

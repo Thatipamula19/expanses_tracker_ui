@@ -65,7 +65,7 @@ const budgetData = [
 ];
 
 const Budget = () => {
-	const { date, category, setCategory, setDate } = useBudgetStore();
+	const { date, category, setCategory, setDate, pagination, setPagination } = useBudgetStore();
 	const [open, setOpen] = useState<boolean>(false);
 
 	const filters = [
@@ -98,7 +98,11 @@ const Budget = () => {
 				<Filter filters={filters} />
 				<Stats statsData={statsData} />
 				<Table data={budgetData} />
-				<Pagination total={3} currentPage={1} onChangePage={() => {}} />
+				<Pagination
+					total={pagination?.total}
+					currentPage={pagination?.current}
+					onChangePage={(page) => setPagination({ ...pagination, current: page })}
+				/>
 				<BudgetInsights />
 			</main>
 			{open && <CreateBudget open={open} setOpen={setOpen} type="Add" />}
