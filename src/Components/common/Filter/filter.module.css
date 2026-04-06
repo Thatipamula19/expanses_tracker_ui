@@ -4,3 +4,49 @@
 	align-items: center;
 	gap: 20px;
 }
+
+@media (min-width: 320px) and (max-width: 480px) {
+	.filter_sec {
+		margin-bottom: 25px;
+		display: flex;
+		align-items: center;
+		gap: 20px;
+		overflow-x: auto;
+	}
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+	.filter_sec {
+		margin-bottom: 25px;
+		display: flex;
+		align-items: center;
+		gap: 20px;
+	}
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+	.filter_sec {
+		margin-bottom: 25px;
+		display: flex;
+		align-items: center;
+		gap: 20px;
+	}
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+	.filter_sec {
+		margin-bottom: 25px;
+		display: flex;
+		align-items: center;
+		gap: 20px;
+	}
+}
+
+@media (min-width: 1199px) {
+	.filter_sec {
+		margin-bottom: 25px;
+		display: flex;
+		align-items: center;
+		gap: 20px;
+	}
+}

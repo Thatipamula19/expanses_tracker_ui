@@ -33,3 +33,41 @@
 		color: #000000;
 	}
 }
+
+@media (min-width: 320px) and (max-width: 567px) {
+	.footer {
+		padding: 0 20px 20px 0;
+		height: auto;
+		flex-direction: column;
+		justify-content: center;
+	}
+}
+
+@media (min-width: 568px) and (max-width: 767px) {
+	.footer {
+		border-top: #e2e8f0 1px solid;
+		padding: 0 20px;
+		height: 64px;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+	.footer {
+		padding: 0 40px;
+	}
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+	.footer {
+		padding: 0 40px;
+	}
+}
+
+@media (min-width: 1199px) {
+	.footer {
+		padding: 0 40px;
+	}
+}

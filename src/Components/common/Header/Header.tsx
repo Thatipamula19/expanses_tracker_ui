@@ -2,6 +2,7 @@ import AppConstants from "@/utils/AppConstants";
 import HoverBtn from "../HoverBtn/HoverBtn";
 import classes from "./header.module.css";
 import { Link, useLocation } from "react-router-dom";
+import { MenuIcon } from "@/assets/svgs";
 
 const navItems = [
 	{
@@ -57,6 +58,9 @@ const Header = () => {
 					clickHandler={() => {}}
 				/>
 			</div>
+			<button className={classes?.mob_menu_btn}>
+				<MenuIcon />
+			</button>
 		</nav>
 	);
 };
