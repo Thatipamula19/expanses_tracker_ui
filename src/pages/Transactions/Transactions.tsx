@@ -3,6 +3,7 @@ import Footer from "@/Components/common/Footer/Footer";
 import Header from "@/Components/common/Header/Header";
 import PageTitleCTA from "@/Components/common/PageTitleCTA/PageTitleCTA";
 import Pagination from "@/Components/common/Pagination/Pagination";
+import { useCategories } from "@/hooks/useCategories";
 import useTransactionsStore from "@/store/useTransactionsStore";
 import AppConstants from "@/utils/AppConstants";
 import { useState } from "react";
@@ -11,6 +12,7 @@ import Table from "./Table/Table";
 import classes from "./transaction.module.css";
 
 const Transactions = () => {
+	const { data: categoriesData, isLoading: isCategoriesLoading } = useCategories();
 	const {
 		date,
 		category,
@@ -39,7 +41,7 @@ const Transactions = () => {
 			name: "Category",
 			value: category,
 			setValue: setCategory,
-			options: AppConstants?.transactionFilters?.category?.options || [],
+			options: categoriesData || [],
 		},
 		{
 			id: 3,

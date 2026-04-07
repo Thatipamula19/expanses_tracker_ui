@@ -10,7 +10,7 @@ const transactions = [
 		id: "1",
 		title: "Thumbs Up",
 		date: "15 Oct 2025",
-		category: "food",
+		category: "4df9ec58-79df-4496-a4af-6f060a1f3fc9",
 		description: "Description",
 		amount: 300.0,
 		type: "expense",

@@ -4,17 +4,19 @@ const Input = ({
 	type,
 	placeholder,
 	halfWidth = false,
+	options,
 	...restProps
 }: {
 	type: string;
 	placeholder: string;
 	halfWidth?: boolean;
+	options?: { value: string; label: string }[];
 }) => {
 	const renderInput = () => {
 		if (type === "textarea") {
 			return <Textarea placeholder={placeholder} {...restProps} />;
 		} else if (type === "select") {
-			return <Select placeholder={placeholder} {...restProps} />;
+			return <Select placeholder={placeholder} options={options} {...restProps} />;
 		}
 		return <PlainInput type={type} placeholder={placeholder} {...restProps} />;
 	};
@@ -36,14 +38,24 @@ const Textarea = ({ placeholder, ...restProps }: { placeholder: string }) => {
 	return <textarea rows={2} placeholder={placeholder} className={classes?.textarea} {...restProps} />;
 };
 
-const Select = ({ placeholder, ...restProps }: { placeholder: string }) => {
+const Select = ({
+	placeholder,
+	options,
+	...restProps
+}: {
+	placeholder: string;
+	options?: { value: string; label: string }[];
+}) => {
 	return (
 		<select className={classes?.input} {...restProps}>
 			<option value="" disabled selected>
 				{placeholder}
 			</option>
-			<option value="1">Category 1</option>
-			<option value="2">Category 2</option>
+			{options?.map((item) => (
+				<option key={item.value} value={item.value}>
+					{item.label}
+				</option>
+			))}
 		</select>
 	);
 };

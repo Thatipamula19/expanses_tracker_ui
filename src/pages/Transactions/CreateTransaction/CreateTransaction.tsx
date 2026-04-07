@@ -4,6 +4,9 @@ import classes from "./styles.module.css";
 import { useForm } from "react-hook-form";
 import { useEffect } from "react";
 import type { Transaction } from "@/types/transactions";
+import { useCategories } from "@/hooks/useCategories";
+import AppConstants from "@/utils/AppConstants";
+import { createTransaction } from "@/services/transactionService";
 
 const CreateTransaction = ({
 	// open,
@@ -23,21 +26,31 @@ const CreateTransaction = ({
 		// setValue,
 		reset,
 	} = useForm<Transaction>();
+	const { data: categoriesData, isLoading: isCategoriesLoading } = useCategories();
 
 	useEffect(() => {
 		if (transaction) {
 			reset({
 				title: transaction.title,
 				description: transaction.description,
-				category: transaction.category,
+				category: categoriesData?.find((item) => item.value === transaction.category)?.value,
 				type: transaction.type,
 				amount: transaction.amount,
 				date: new Date(transaction.date).toLocaleDateString("en-CA"),
 			});
 		}
-	}, [transaction, reset]);
+	}, [transaction, reset, categoriesData]);
 
-	const handleTransTransaction = (data: Transaction) => console.log(data);
+	const handleTransTransaction = async (data: Transaction) => {
+		console.log(data);
+		try {
+			const res = await createTransaction(data);
+			console.log(res);
+			
+		} catch (error) {
+			console.log(error);
+		}
+	}
 
 	return (
 		<Modal setOpen={setOpen}>
@@ -50,9 +63,15 @@ const CreateTransaction = ({
 						placeholder="Describe the transaction..."
 						{...register("description", { required: true })}
 					/>
-					<Input type="select" placeholder="Select Category" {...register("category", { required: true })} />
 					<Input
 						type="select"
+						options={categoriesData}
+						placeholder="Select Category"
+						{...register("category", { required: true })}
+					/>
+					<Input
+						type="select"
+						options={AppConstants.transactionFilters?.transactionType?.options || []}
 						placeholder="Select Transaction Type"
 						{...register("type", { required: true })}
 					/>

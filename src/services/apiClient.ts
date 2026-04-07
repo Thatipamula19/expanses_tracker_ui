@@ -1,4 +1,4 @@
-import { getCookies, setCookies } from "@/utils/auth";
+import { getCookies, removeCookies, setCookies } from "@/utils/auth";
 import axios, { type InternalAxiosRequestConfig } from "axios";
 
 const api = axios.create({
@@ -70,7 +70,9 @@ api.interceptors.response.use(
         return api(originalRequest);
       } catch (err) {
         isRefreshing = false;
-        window.location.href = "/login";
+        removeCookies("token");
+        removeCookies("refresh_token");
+        window.location.href = "/sign-in";
         return Promise.reject(err);
       }
     }
