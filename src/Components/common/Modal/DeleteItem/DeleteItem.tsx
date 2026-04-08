@@ -1,3 +1,4 @@
+import ButtonLoader from "../../Loaders/ButtonLoader/ButtonLoader";
 import Modal from "../Modal";
 import classes from "./deleteItem.module.css";
 
@@ -6,16 +7,16 @@ const DeleteItem = ({
 	description,
 	setOpen,
 	onDelete,
+	isPending,
 }: {
 	title: string;
 	setOpen: (open: boolean) => void;
 	description: string;
 	onDelete: () => void;
+	isPending: boolean;
 }) => {
-	const onCancel = () => setOpen(false);
-
 	const handleDelete = () => {
-		// setOpen(false);
+		setOpen(false);
 		onDelete();
 	};
 
@@ -27,11 +28,11 @@ const DeleteItem = ({
 				<span className={classes?.description}>This action cannot be undone.</span>
 
 				<div className={classes?.button_group}>
-					<button onClick={onCancel} className={classes?.cancel_btn}>
+					<button onClick={() => setOpen(false)} className={classes?.cancel_btn}>
 						Cancel
 					</button>
 					<button onClick={handleDelete} className={classes?.delete_btn}>
-						Delete
+						{isPending ? <ButtonLoader /> : "Delete"}
 					</button>
 				</div>
 			</div>

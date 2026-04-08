@@ -10,6 +10,9 @@ import { useState } from "react";
 import CreateTransaction from "./CreateTransaction/CreateTransaction";
 import Table from "./Table/Table";
 import classes from "./transaction.module.css";
+import { useQuery } from "@tanstack/react-query";
+import { getFilteredTransactions } from "@/services/transactionService";
+import { toast } from "react-toastify";
 
 const Transactions = () => {
 	const { data: categoriesData, isLoading: isCategoriesLoading } = useCategories();
@@ -18,8 +21,6 @@ const Transactions = () => {
 		category,
 		transactionType,
 		sort,
-		// transactions,
-		// setTransactions,
 		pagination,
 		setPagination,
 		setDate,
@@ -60,6 +61,28 @@ const Transactions = () => {
 	];
 
 	const [open, setOpen] = useState<boolean>(false);
+
+	const { data, isLoading, error } = useQuery({
+		queryKey: ["transactions", date?.value, category?.value, transactionType, sort, pagination?.current],
+		queryFn: async () => {
+			const data = await getFilteredTransactions({
+				period: date?.value,
+				sort: sort?.value === "all" ? undefined : sort?.value,
+				limit: 2,
+				transaction_type: transactionType?.value === "all" ? undefined : transactionType?.value,
+				categories: category?.label === "All Category" ? [] : [category?.value],
+				page: pagination?.current,
+			});
+
+			if (error) {
+				toast.error(data?.error);
+			}
+
+			return data;
+		},
+		staleTime: 1000 * 60 * 5,
+	});
+
 	return (
 		<>
 			<Header />
@@ -71,10 +94,10 @@ const Transactions = () => {
 					ctaHandler={() => setOpen(true)}
 				/>
 				<Filter filters={filters} />
-				<Table />
+				<Table transactions={data?.transactions?.data || []} />
 				<Pagination
-					total={pagination?.total}
-					currentPage={pagination?.current}
+					total={data?.transactions?.meta?.totalPages || 1}
+					currentPage={data?.transactions?.meta?.currentPage || 1}
 					onChangePage={(page) => setPagination({ ...pagination, current: page })}
 				/>
 			</main>

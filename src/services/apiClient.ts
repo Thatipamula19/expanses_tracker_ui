@@ -61,8 +61,8 @@ api.interceptors.response.use(
 
         const newAccessToken = res?.data?.access_token || "";
 
-        setCookies("token", newAccessToken);
-        setCookies("refresh_token", res?.data?.refresh_token || "", 10);
+        setCookies("token", newAccessToken, 24 * 60);
+        setCookies("refresh_token", res?.data?.refresh_token || "", 24 * 60);
         isRefreshing = false;
         onRefreshed(newAccessToken);
 

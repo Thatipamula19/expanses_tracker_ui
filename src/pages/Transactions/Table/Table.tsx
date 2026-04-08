@@ -1,95 +1,14 @@
 import DeleteItem from "@/Components/common/Modal/DeleteItem/DeleteItem";
+import { deleteTransaction } from "@/services/transactionService";
 import type { Transaction } from "@/types/transactions";
 import AppConstants from "@/utils/AppConstants";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import CreateTransaction from "../CreateTransaction/CreateTransaction";
 import classes from "./table.module.css";
 
-const transactions = [
-	{
-		id: "1",
-		title: "Thumbs Up",
-		date: "15 Oct 2025",
-		category: "4df9ec58-79df-4496-a4af-6f060a1f3fc9",
-		description: "Description",
-		amount: 300.0,
-		type: "expense",
-	},
-	{
-		id: "2",
-		title: "Salary",
-		date: "18 Oct 2025",
-		category: "salary",
-		description: "Description",
-		amount: 1000.0,
-		type: "income",
-	},
-	{
-		id: "3",
-		title: "Rent",
-		date: "15 Oct 2025",
-		category: "bills",
-		description: "Description",
-		amount: 1000.0,
-		type: "expense",
-	},
-	{
-		id: "4",
-		title: "Gas",
-		date: "15 Oct 2025",
-		category: "bills",
-		description: "Description",
-		amount: 100.0,
-		type: "expense",
-	},
-	{
-		id: "5",
-		title: "Electricity",
-		date: "15 Oct 2025",
-		category: "bills",
-		description: "Description",
-		amount: 100.0,
-		type: "expense",
-	},
-	{
-		id: "6",
-		title: "Internet",
-		date: "15 Oct 2025",
-		category: "bills",
-		description: "Description",
-		amount: 100.0,
-		type: "expense",
-	},
-	{
-		id: "7",
-		title: "Netflix",
-		date: "15 Oct 2025",
-		category: "entertainment",
-		description: "Description",
-		amount: 100.0,
-		type: "expense",
-	},
-	{
-		id: "8",
-		title: "books",
-		date: "15 Oct 2025",
-		category: "education",
-		description: "Description",
-		amount: 100.0,
-		type: "expense",
-	},
-	{
-		id: "9",
-		title: "Other",
-		date: "15 Oct 2025",
-		category: "other",
-		description: "Description",
-		amount: 100.0,
-		type: "expense",
-	},
-];
-
-const Table = () => {
+const Table = ({ transactions }: { transactions: Transaction[] }) => {
+	const queryClient = useQueryClient();
 	const [open, setOpen] = useState<boolean>(false);
 	const [transaction, setTransaction] = useState<Transaction>(null!);
 	const [deleteOpen, setDeleteOpen] = useState<boolean>(false);
@@ -104,8 +23,19 @@ const Table = () => {
 		setDeleteOpen(true);
 	};
 
+	const { mutate, isPending } = useMutation({
+		mutationFn: () => deleteTransaction(transaction?.id),
+		onSuccess: () => {
+			queryClient.invalidateQueries({ queryKey: ["transactions"] });
+			setOpen(false);
+		},
+		onError: (error) => {
+			console.log(error);
+		},
+	});
+
 	const handleDeleteTransaction = () => {
-		console.log(transaction);
+		mutate();
 	};
 
 	return (
@@ -113,7 +43,7 @@ const Table = () => {
 			<table className={classes?.table}>
 				<thead className={classes?.table_header}>
 					<tr>
-						<th>Name</th>
+						<th>Title</th>
 						<th>Date</th>
 						<th>Category</th>
 						<th>Description</th>
@@ -127,7 +57,7 @@ const Table = () => {
 					{transactions.map((item) => (
 						<tr key={item.title} className={classes?.table_row}>
 							<td>{item.title}</td>
-							<td>{item.date}</td>
+							<td>{item.transaction_date}</td>
 							<td>
 								<div className={classes?.category}>
 									<div className={classes?.category}>
@@ -135,20 +65,14 @@ const Table = () => {
 											<img
 												src={
 													AppConstants?.category?.[
-														item.category as keyof typeof AppConstants.category
+														item.category_icon as keyof typeof AppConstants.category
 													]
 												}
-												alt={item.category}
+												alt={item.category_icon}
 												className={classes?.icon}
 											/>
 										</div>
-										<span className={classes?.category_name}>
-											{
-												AppConstants?.categoryMap?.[
-													item.category as keyof typeof AppConstants.categoryMap
-												]
-											}
-										</span>
+										<span className={classes?.category_name}>{item.category_name}</span>
 									</div>
 								</div>
 							</td>
@@ -183,6 +107,7 @@ const Table = () => {
 					description="Are you sure you want to delete this transaction?"
 					setOpen={setDeleteOpen}
 					onDelete={handleDeleteTransaction}
+					isPending={isPending}
 				/>
 			)}
 		</div>

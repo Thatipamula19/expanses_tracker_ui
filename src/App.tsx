@@ -11,6 +11,7 @@ import Goals from "./pages/Goals/Goals";
 import Reports from "./pages/Reports/Reports";
 import Transactions from "./pages/Transactions/Transactions";
 import useAuthStore from "./store/useAuthStore";
+import Toaster from "./Components/common/Toaster/Toaster";
 
 function App() {
 	const { isAuthenticated } = useAuthStore();
@@ -41,6 +42,7 @@ function App() {
 						element={!isAuthenticated ? <ResetPassword /> : <Navigate to="/" />}
 					/>
 				</Routes>
+				<Toaster />
 			</BrowserRouter>
 		</>
 	);

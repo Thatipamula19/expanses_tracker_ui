@@ -10,14 +10,19 @@ import { useForm } from "react-hook-form";
 import AuthLayout from "../AuthLayout/AuthLayout";
 import classes from "./signup.module.css";
 import { signup } from "@/services/userServices";
+import { setCookies } from "@/utils/auth";
+import useAuthStore from "@/store/useAuthStore";
+import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
+	const navigate = useNavigate();
 	const {
 		register,
 		handleSubmit,
 		watch,
 		formState: { errors, isValid },
 	} = useForm<SignUpFormTypes>({ mode: "all" });
+	const { setUser, setAuthenticated } = useAuthStore();
 
 	const [open, setOpen] = useState(false);
 
@@ -28,7 +33,6 @@ const Signup = () => {
 	};
 
 	const handleSignup = async (data: SignUpFormTypes) => {
-		console.log(data);
 		delete data.confirmPassword;
 		mutate(data);
 	};
@@ -36,7 +40,18 @@ const Signup = () => {
 	const { mutate, isPending } = useMutation({
 		mutationFn: (data: SignUpFormTypes) => signup(data),
 		onSuccess: (data) => {
-			console.log(data);
+			setCookies("token", data?.access_token || "", 24 * 60); //24 hours
+			setCookies("refresh_token", data?.refresh_token || "", 24 * 60);
+			setAuthenticated(true);
+			const user = {
+				id: data?.user_id,
+				email: data?.email,
+				name: data?.user_name,
+				role: data?.user_role,
+			};
+			setUser(user);
+			setCookies("user_info", JSON.stringify(user), 24 * 60);
+			navigate("/");
 		},
 		onError: (error) => {
 			console.log(error);

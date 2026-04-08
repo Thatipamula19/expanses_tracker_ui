@@ -4,8 +4,10 @@ export type Transaction = {
 	type: "expense" | "income" | string;
 	amount: number;
 	description: string;
-	category: string;
-	date: string;
+	category_id: string;
+	transaction_date: string;
+	category_icon: string;
+	category_name: string;
 };
 
 export type FilterType = {

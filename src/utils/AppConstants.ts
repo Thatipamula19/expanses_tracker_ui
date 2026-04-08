@@ -87,27 +87,28 @@ const AppConstants = Object.freeze({
 			options: [
 				{
 					label: "This Month",
-					value: "thisMonth",
+					value: "this_month",
 				},
 				{
 					label: "Today",
 					value: "today",
 				},
 				{
-					label: "Last Month",
-					value: "lastMonth",
-				},
-				{
 					label: "This Week",
-					value: "thisWeek",
+					value: "this_week",
 				},
 				{
-					label: "Last Week",
-					value: "lastWeek",
+					label: "Last Month",
+					value: "last_month",
 				},
+
+				// {
+				// 	label: "Last Week",
+				// 	value: "last_week",
+				// },
 				{
 					label: "Last 3 Months",
-					value: "last3Months",
+					value: "last_3_months",
 				},
 			],
 		},
@@ -190,11 +191,11 @@ const AppConstants = Object.freeze({
 			options: [
 				{
 					label: "Newest First",
-					value: "newestFirst",
+					value: "desc",
 				},
 				{
 					label: "Oldest First",
-					value: "oldestFirst",
+					value: "asc",
 				},
 			],
 		},

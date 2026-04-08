@@ -1,18 +1,18 @@
-import AuthLayout from "../AuthLayout/AuthLayout";
 import googleIcon from "@/assets/authIcons/google.svg";
 import logoLight from "@/assets/logos/logo_light.svg";
-import classes from "./signin.module.css";
 import AuthButton from "@/Components/common/AuthButton/AuthButton";
-import AppConstants from "@/utils/AppConstants";
 import DynamicInput from "@/Components/common/DynamicInput/DynamicInput";
+import { login } from "@/services/userServices";
+import useAuthStore from "@/store/useAuthStore";
+import type { SignInFormTypes } from "@/types/auth";
+import AppConstants from "@/utils/AppConstants";
+import { setCookies } from "@/utils/auth";
+import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import type { SignInFormTypes } from "@/types/auth";
-import { useMutation } from "@tanstack/react-query";
-import { login } from "@/services/userServices";
-import { setCookies } from "@/utils/auth";
 import { useNavigate } from "react-router-dom";
-import useAuthStore from "@/store/useAuthStore";
+import AuthLayout from "../AuthLayout/AuthLayout";
+import classes from "./signin.module.css";
 
 const Signin = () => {
 	const navigate = useNavigate();
@@ -39,8 +39,8 @@ const Signin = () => {
 		mutationFn: (data: SignInFormTypes) => login(data),
 
 		onSuccess: (data) => {
-			setCookies("token", data?.access_token || "", 10);
-			setCookies("refresh_token", data?.refresh_token || "", 10);
+			setCookies("token", data?.access_token || "", 24 * 60 ); //24 hours
+			setCookies("refresh_token", data?.refresh_token || "", 24 * 60);
 			setAuthenticated(true);
 			const user = {
 				id: data?.user_id,
@@ -49,7 +49,7 @@ const Signin = () => {
 				role: data?.user_role,
 			}
 			setUser(user);
-			setCookies("user_info", JSON.stringify(user), 10);
+			setCookies("user_info", JSON.stringify(user), 24 * 60);
 			navigate("/");
 		},
 
