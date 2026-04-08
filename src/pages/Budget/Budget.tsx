@@ -11,6 +11,10 @@ import BudgetInsights from "./BudgetInsights/BudgetInsights";
 import CreateBudget from "./CreateBudget/CreateBudget";
 import Stats from "./Stats/Stats";
 import Table from "./Table/Table";
+import { getFilteredBudgets } from "@/services/budgetService";
+import { useQuery } from "@tanstack/react-query";
+import { toast } from "react-toastify";
+import { useCategories } from "@/hooks/useCategories";
 
 const statsData = [
 	{
@@ -67,7 +71,7 @@ const budgetData = [
 const Budget = () => {
 	const { date, category, setCategory, setDate, pagination, setPagination } = useBudgetStore();
 	const [open, setOpen] = useState<boolean>(false);
-
+	const { data: categoriesData, isLoading: isCategoriesLoading } = useCategories();
 	const filters = [
 		{
 			id: 1,
@@ -81,9 +85,30 @@ const Budget = () => {
 			name: "Category",
 			value: category,
 			setValue: setCategory,
-			options: AppConstants?.budgetFilters?.category?.options || [],
+			options: categoriesData || [],
 		},
 	];
+
+	const { data, isLoading, error } = useQuery({
+		queryKey: ["budgets", date?.value, category?.value, pagination?.current],
+		queryFn: async () => {
+			const data = await getFilteredBudgets({
+				month: 4,
+				year: 2026,
+				limit: 2,
+				category_id: category?.value === "all" ? undefined : category?.value,
+				page: pagination?.current,
+			});
+
+			if (error) {
+				toast.error(data?.error);
+			}
+
+			return data;
+		},
+		staleTime: 1000 * 60 * 5,
+	});
+	
 	return (
 		<>
 			<Header />
@@ -97,10 +122,10 @@ const Budget = () => {
 				/>
 				<Filter filters={filters} />
 				<Stats statsData={statsData} />
-				<Table data={budgetData} />
+				<Table data={data?.data || []} />
 				<Pagination
-					total={pagination?.total}
-					currentPage={pagination?.current}
+					total={data?.meta?.totalPages || 1}
+					currentPage={data?.meta?.currentPage || 1}
 					onChangePage={(page) => setPagination({ ...pagination, current: page })}
 				/>
 				<BudgetInsights />
