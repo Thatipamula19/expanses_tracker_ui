@@ -5,7 +5,7 @@ import { type AxiosRequestConfig } from "axios";
 interface ApiOptions extends AxiosRequestConfig {
 	withAuth?: boolean;
 }
-export const getTransactions = async () => {
+export const getStats = async () => {
 	try {
 		const res = await api.get("transactions/get-statistics", { withAuth: true } as ApiOptions);
 		return res.data;

@@ -1,3 +1,4 @@
+// Auth Icons
 import emailIcon from "@/assets/authIcons/email.svg";
 import lockIcon from "@/assets/authIcons/lock.svg";
 import eyeOpenIcon from "@/assets/authIcons/eye_open.svg";
@@ -7,15 +8,20 @@ import notificationHoverHoverIcon from "@/assets/header/notification_hover.svg";
 import userIcon from "@/assets/header/user.svg";
 import userHoverIcon from "@/assets/header/user_hover.svg";
 
+// Logos
 import logoLight from "@/assets/logos/logo_light.svg";
 import logoPrimary from "@/assets/logos/logo_primary.svg";
 import logoSecondary from "@/assets/logos/logo_secondary.svg";
 
+//Common Icons
 import plusIcon from "@/assets/common/plus.svg";
 import pencilIcon from "@/assets/common/pencil.svg";
 import trashIcon from "@/assets/common/trash.svg";
 import arrowDownIcon from "@/assets/common/arrow_down.svg";
+import trendUpIcon from "@/assets/common/trend_up.svg";
+import trendDownIcon from "@/assets/common/trend_down.svg";
 
+// Category Icons
 import salaryIcon from "@/assets/category/salary.svg";
 import foodIcon from "@/assets/category/food.svg";
 import transportIcon from "@/assets/category/transport.svg";
@@ -50,6 +56,8 @@ const AppConstants = Object.freeze({
 		pencil: pencilIcon,
 		trash: trashIcon,
 		arrowDown: arrowDownIcon,
+		trendUp: trendUpIcon,
+		trendDown: trendDownIcon,
 	},
 	category: {
 		salary: salaryIcon,

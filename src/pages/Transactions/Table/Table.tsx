@@ -77,7 +77,7 @@ const Table = ({ transactions }: { transactions: Transaction[] }) => {
 								</div>
 							</td>
 							<td>{item.description}</td>
-							<td>₹{item.amount}</td>
+							<td>₹{Number(item.amount).toLocaleString("en-IN")}</td>
 							<td>
 								<span
 									className={`${classes?.badge} ${item.type === "expense" ? classes?.expense : classes?.income}`}>
