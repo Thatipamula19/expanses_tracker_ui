@@ -6,6 +6,9 @@ import useReportsStore from "@/store/useReportsStore";
 import AppConstants from "@/utils/AppConstants";
 import Filter from "@/Components/common/Filter/Filter";
 import FinancialOverview from "./FinancialOverview/FinancialOverview";
+import { getReports } from "@/services/reportService";
+import { toast } from "react-toastify";
+import { useQuery } from "@tanstack/react-query";
 
 const Reports = () => {
 	const { category, timePeriod, setCategory, setTimePeriod } = useReportsStore();
@@ -27,13 +30,30 @@ const Reports = () => {
 		},
 	];
 
+	const { data, isLoading, error } = useQuery({
+		queryKey: ["reports", timePeriod?.value, category?.value],
+		queryFn: async () => {
+			const data = await getReports({
+				time_period: timePeriod?.value,
+				category_id: category?.value === "all" ? undefined : category?.value,
+			});
+
+			if (error) {
+				toast.error(data?.error);
+			}
+
+			return data;
+		},
+		staleTime: 1000 * 60 * 5,
+	});
+
 	return (
 		<>
 			<Header />
 			<main className={classes?.reports_main}>
-				<PageTitleCTA pageTitle="Reports / Analytics" buttonName="Export" icon={false} ctaHandler={() => {}} />
+				<PageTitleCTA pageTitle="Reports / Analytics" buttonName="Export" icon={false} ctaHandler={() => { }} />
 				<Filter filters={filters} />
-				<FinancialOverview />
+				<FinancialOverview reportData={data} isLoading={isLoading} error={error} />
 			</main>
 			<Footer />
 		</>

@@ -423,20 +423,24 @@ const AppConstants = Object.freeze({
 			name: "Time Period",
 			options: [
 				{
-					label: "Weekly",
-					value: "weekly",
+					label: "This Month",
+					value: "this_month",
 				},
 				{
-					label: "Monthly",
-					value: "monthly",
+					label: "Last Month",
+					value: "last_month",
 				},
 				{
-					label: "Quarterly",
-					value: "quarterly",
+					label: "Last 3 Months",
+					value: "last_3_months",
 				},
 				{
-					label: "Yearly",
-					value: "yearly",
+					label: "Last 6 Months",
+					value: "last_6_months",
+				},
+				{
+					label: "This Year",
+					value: "this_year",
 				},
 			],
 		},

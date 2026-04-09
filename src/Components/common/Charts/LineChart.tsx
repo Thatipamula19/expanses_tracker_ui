@@ -34,7 +34,6 @@ const data = [
 ];
 
 const DynamicLineChart = ({ data }: { data: any[]; }) => {
-	console.log(data);
 	return (
 		<>
 			<LineChart style={{ width: "100%", maxWidth: "600px", maxHeight: "300px", aspectRatio: 1.618 }} data={data}>

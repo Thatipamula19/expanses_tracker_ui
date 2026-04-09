@@ -64,11 +64,11 @@ const WrappedTick = (props: any) => {
 };
 
 // #endregion
-const SimpleBarChart = () => {
+const SimpleBarChart = ({ data }: { data: any[] }) => {
 	return (
 		<ResponsiveContainer width="100%" height={350}>
 			<BarChart
-				data={data}
+				data={data || []}
 				margin={{
 					top: 20,
 					right: 30,
@@ -78,7 +78,7 @@ const SimpleBarChart = () => {
 				barGap={8}>
 				<CartesianGrid vertical={false} strokeDasharray="3 3" stroke="#EBEBEB" />
 				<XAxis
-					dataKey="name"
+					dataKey="category_name"
 					axisLine={{ stroke: "#64748b" }}
 					tickLine={false}
 					tick={<WrappedTick />}
@@ -89,21 +89,19 @@ const SimpleBarChart = () => {
 					tickLine={false}
 					tick={{ fill: "#64748b", fontSize: 12 }}
 					domain={[0, 200000]}
-					ticks={[0, 50000, 100000, 150000, 200000]}
+					ticks={[0, 1000, 50000, 100000, 150000, 200000]}
 				/>
 				<Tooltip
 					cursor={{ fill: "transparent" }}
 					contentStyle={{ backgroundColor: "#E2E8F0", borderColor: "#64748B", fontSize: "12px" }}
 				/>
 				<Legend
-					// layout="vertical"
 					verticalAlign="bottom"
 					iconType="square"
 					iconSize={14}
 					wrapperStyle={{ fontSize: "12px", color: "#64748b", marginTop: 20 }}
 				/>
-				<Bar dataKey="saved" name="Saved Amount" fill="#00b894" radius={[2, 2, 0, 0]} barSize={25} />
-				<Bar dataKey="remaining" name="Remaining Amount" fill="#e2e8f0" radius={[2, 2, 0, 0]} barSize={25} />
+				<Bar dataKey="amount" name="Amount" fill="#00b894" radius={[2, 2, 0, 0]} barSize={25} />
 			</BarChart>
 		</ResponsiveContainer>
 	);
