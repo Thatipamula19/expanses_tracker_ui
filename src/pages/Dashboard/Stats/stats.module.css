@@ -18,6 +18,7 @@
 	box-shadow: 0px 6px 18px 0px #0206170f;
 	border-radius: 12px;
 	padding: 12px;
+	border: 1px solid #f0f3f6;
 }
 
 .title {
@@ -32,8 +33,19 @@
 	font-size: 28px;
 }
 
-.trend {
+.change_desc {
 	color: #22c55e;
 	font-weight: 400;
 	font-size: 12px;
+	display: flex;
+	align-items: center;
+	gap: 5px;
+
+	img {
+		margin-top: 4px;
+	}
+}
+
+.drop {
+	color: #ef4444;
 }
