@@ -37,37 +37,6 @@ const statsData = [
 	},
 ];
 
-const budgetData = [
-	{
-		id: "1",
-		date: "15 Oct 2025",
-		category: "food",
-		limit: 1000,
-		spent: 1200,
-	},
-	{
-		id: "2",
-		date: "15 Oct 2025",
-		category: "transport",
-		limit: 500,
-		spent: 200,
-	},
-	{
-		id: "3",
-		date: "15 Oct 2025",
-		category: "entertainment",
-		limit: 200,
-		spent: 100,
-	},
-	{
-		id: "4",
-		date: "15 Oct 2025",
-		category: "health",
-		limit: 500,
-		spent: 400,
-	},
-];
-
 const Budget = () => {
 	const { date, category, setCategory, setDate, pagination, setPagination } = useBudgetStore();
 	const [open, setOpen] = useState<boolean>(false);
@@ -93,8 +62,7 @@ const Budget = () => {
 		queryKey: ["budgets", date?.value, category?.value, pagination?.current],
 		queryFn: async () => {
 			const data = await getFilteredBudgets({
-				month: 4,
-				year: 2026,
+				period: date?.value,
 				limit: 2,
 				category_id: category?.value === "all" ? undefined : category?.value,
 				page: pagination?.current,

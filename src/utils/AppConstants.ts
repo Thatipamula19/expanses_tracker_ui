@@ -215,31 +215,31 @@ const AppConstants = Object.freeze({
 			options: [
 				{
 					label: "Jan 2026",
-					value: "jan2026",
+					value: "2026-01",
 				},
 				{
 					label: "Feb 2026",
-					value: "feb2026",
+					value: "2026-02",
 				},
 				{
 					label: "Mar 2026",
-					value: "mar2026",
+					value: "2026-03",
 				},
 				{
 					label: "Apr 2026",
-					value: "apr2026",
+					value: "2026-04",
 				},
 				{
 					label: "May 2026",
-					value: "may2026",
+					value: "2026-05",
 				},
 				{
 					label: "Jun 2026",
-					value: "jun2026",
+					value: "2026-06",
 				},
 				{
 					label: "Jul 2026",
-					value: "jul2026",
+					value: "2026-07",
 				},
 				{
 					label: "Aug 2026",
@@ -247,19 +247,19 @@ const AppConstants = Object.freeze({
 				},
 				{
 					label: "Sep 2026",
-					value: "sep2026",
+					value: "2026-09",
 				},
 				{
 					label: "Oct 2026",
-					value: "oct2026",
+					value: "2026-10",
 				},
 				{
 					label: "Nov 2026",
-					value: "nov2026",
+					value: "2026-11",
 				},
 				{
 					label: "Dec 2026",
-					value: "dec2026",
+					value: "2026-12",
 				},
 			],
 		},

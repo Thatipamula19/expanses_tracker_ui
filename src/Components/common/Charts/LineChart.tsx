@@ -33,12 +33,13 @@ const data = [
 	},
 ];
 
-const DynamicLineChart = () => {
+const DynamicLineChart = ({ data }: { data: any[]; }) => {
+	console.log(data);
 	return (
 		<>
 			<LineChart style={{ width: "100%", maxWidth: "600px", maxHeight: "300px", aspectRatio: 1.618 }} data={data}>
 				<CartesianGrid vertical={false} strokeDasharray="3 3" stroke="#EBEBEB" />
-				<XAxis dataKey="name" padding={{ left: 30, right: 30 }} stroke="#CCCCCC" />
+				<XAxis dataKey="month" padding={{ left: 30, right: 30 }} stroke="#CCCCCC" />
 				<YAxis
 					width={60}
 					stroke="#CCCCCC"
