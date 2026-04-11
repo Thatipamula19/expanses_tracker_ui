@@ -1,5 +1,4 @@
-.status_sec {
-}
+.status_sec {}
 
 .status_list {
 	display: flex;
@@ -48,4 +47,10 @@
 
 .drop {
 	color: #ef4444;
+}
+
+@media screen and (max-width: 768px) {
+	.status_list {
+		flex-direction: column;
+	}
 }

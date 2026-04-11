@@ -42,8 +42,8 @@ const DynamicLineChart = ({ data }: { data: any[]; }) => {
 				<YAxis
 					width={60}
 					stroke="#CCCCCC"
-					domain={[18000, 28000]}
-					ticks={[18000, 20000, 22000, 24000, 26000, 28000]}
+					domain={[1000, 28000]}
+					ticks={[1000, 5000, 10000, 15000, 20000, 22000, 24000, 26000, 28000]}
 				/>
 				<Tooltip
 					cursor={{ stroke: "#64748B" }}
