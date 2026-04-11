@@ -10,6 +10,9 @@ import Pagination from "@/Components/common/Pagination/Pagination";
 import ProgressOverview from "./ProgressOverview/ProgressOverview";
 import CreateGoal from "./CreateGoal/CreateGoal";
 import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { getFilteredGoals } from "@/services/goalService";
+import { toast } from "react-toastify";
 
 const goalsData = [
 	{
@@ -75,6 +78,25 @@ const Goals = () => {
 		},
 	];
 
+	const { data, isLoading, error } = useQuery({
+		queryKey: ["goals", status, timePeriod, pagination?.current],
+		queryFn: async () => {
+			const data = await getFilteredGoals({
+				status: status?.value === "all" ? undefined : status?.value,
+				time_period: timePeriod?.value,
+				page: pagination?.current,
+				limit: 2,
+			});
+
+			if (error) {
+				toast.error(data?.error);
+			}
+
+			return data;
+		},
+		staleTime: 1000 * 60 * 5,
+	});
+
 	return (
 		<>
 			<Header />
@@ -89,10 +111,10 @@ const Goals = () => {
 					}}
 				/>
 				<Filter filters={filters} />
-				<Table data={goalsData} />
+				<Table data={data?.goals || []} />
 				<Pagination
-					total={pagination.total}
-					currentPage={pagination.current}
+					total={data?.meta?.totalPages || 1}
+					currentPage={data?.meta?.currentPage || 1}
 					onChangePage={(page) => setPagination({ ...pagination, current: page })}
 				/>
 				<ProgressOverview />

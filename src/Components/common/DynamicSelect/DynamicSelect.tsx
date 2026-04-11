@@ -43,7 +43,8 @@ const DynamicSelect = ({
 			{open && (
 				<ul className={classes?.opt_list}>
 					{options.map((item) => (
-						<li
+						<li 
+							key={`dynamic_select_${item.value}`}
 							className={`${classes?.opt_item} ${value?.value === item.value ? classes?.active : ""}`}
 							onClick={(e) => {
 								e.stopPropagation();

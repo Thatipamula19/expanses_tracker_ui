@@ -343,23 +343,40 @@ const AppConstants = Object.freeze({
 			name: "Time Period",
 			options: [
 				{
-					label: "Weekly",
-					value: "weekly",
+					label: "This Month",
+					value: "this_month",
 				},
 				{
-					label: "Monthly",
-					value: "monthly",
+					label: "Last 3 Months",
+					value: "last_3_months",
 				},
 				{
-					label: "Quarterly",
-					value: "quarterly",
+					label: "Last 6 Months",
+					value: "last_6_months",
 				},
 				{
-					label: "Yearly",
-					value: "yearly",
+					label: "This Year",
+					value: "this_year",
+				},
+				{
+					label: "All Time",
+					value: "all_time",
 				},
 			],
 		},
+		form_status: {
+			name: "Status",
+			options: [
+				{
+					label: "Ongoing",
+					value: "ongoing",
+				},
+				{
+					label: "Completed",
+					value: "completed",
+				},
+			],
+		}
 	},
 	reportsFilters: {
 		category: {

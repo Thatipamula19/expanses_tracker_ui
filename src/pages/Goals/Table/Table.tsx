@@ -5,8 +5,11 @@ import AppConstants from "@/utils/AppConstants";
 import { useState } from "react";
 import classes from "./table.module.css";
 import CreateGoal from "../CreateGoal/CreateGoal";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { deleteGoal } from "@/services/goalService";
 
 const Table = ({ data }: { data: Goal[] }) => {
+	const queryClient = useQueryClient();
 	const [open, setOpen] = useState<boolean>(false);
 	const [goal, setGoal] = useState<Goal>(null!);
 	const [deleteOpen, setDeleteOpen] = useState<boolean>(false);
@@ -21,8 +24,19 @@ const Table = ({ data }: { data: Goal[] }) => {
 		setDeleteOpen(true);
 	};
 
+	const { mutate, isPending } = useMutation({
+		mutationFn: () => deleteGoal(goal?.goal_id),
+		onSuccess: () => {
+			queryClient.invalidateQueries({ queryKey: ["goals"] });
+			setOpen(false);
+		},
+		onError: (error) => {
+			console.log(error);
+		},
+	});
+
 	const handleDeleteGoal = () => {
-		console.log(goal);
+		mutate();
 	};
 
 	return (
@@ -42,8 +56,8 @@ const Table = ({ data }: { data: Goal[] }) => {
 
 				<tbody>
 					{data.map((item) => (
-						<tr key={item.id} className={classes?.table_row}>
-							<td>{item.title}</td>
+						<tr key={`goals_${item.goal_id}`} className={classes?.table_row}>
+							<td>{item.goal_name}</td>
 							<td>
 								<div className={classes?.category}>
 									<div className={classes?.category}>
@@ -51,27 +65,21 @@ const Table = ({ data }: { data: Goal[] }) => {
 											<img
 												src={
 													AppConstants?.category?.[
-														item.category as keyof typeof AppConstants.category
+													item.category_icon as keyof typeof AppConstants.category
 													]
 												}
-												alt={item.category}
+												alt={item.category_icon}
 												className={classes?.icon}
 											/>
 										</div>
-										<span className={classes?.category_name}>
-											{
-												AppConstants?.categoryMap?.[
-													item.category as keyof typeof AppConstants.categoryMap
-												]
-											}
-										</span>
+										<span className={classes?.category_name}>{item.category_name}</span>
 									</div>
 								</div>
 							</td>
-							<td>₹{item.target}</td>
-							<td>₹{item.saved}</td>
+							<td>₹{item.target_amount?.toLocaleString("en-IN")}</td>
+							<td>₹{item.saved_amount?.toLocaleString("en-IN")}</td>
 							<td>
-								<ProgressBar filled={(item.saved / item.target) * 100} />
+								<ProgressBar filled={item?.progress_percent || 0} />
 							</td>
 							<td>
 								<span
@@ -103,6 +111,7 @@ const Table = ({ data }: { data: Goal[] }) => {
 					description="Are you sure you want to delete this goal?"
 					setOpen={setDeleteOpen}
 					onDelete={handleDeleteGoal}
+					isPending={isPending}
 				/>
 			)}
 		</div>
