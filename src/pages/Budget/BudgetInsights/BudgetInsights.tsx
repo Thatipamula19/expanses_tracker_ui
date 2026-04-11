@@ -33,7 +33,7 @@ const BudgetInsights = () => {
 						<span>Monthly trend</span>
 					</div>
 
-					<DynamicLineChart data={data?.budget_vs_spending?.data || []} />
+					<DynamicLineChart data={data?.budget_vs_spending?.data || []} chartKeys={data?.budget_vs_spending?.chart_keys} />
 				</div>
 				<div className={classes.card}>
 					<div className={classes.card_header}>

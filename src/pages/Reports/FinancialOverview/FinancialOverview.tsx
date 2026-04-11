@@ -15,7 +15,7 @@ const FinancialOverview = ({ reportData, isLoading, error }: { reportData: any; 
 						{/* <span>Monthly trend</span> */}
 					</div>
 
-					<DynamicLineChart data={reportData?.income_vs_expense?.data || []} />
+					<DynamicLineChart data={reportData?.income_vs_expense?.data || []} chartKeys={reportData?.income_vs_expense?.chart_keys} />
 				</div>
 				<div className={classes.card}>
 					<div className={classes.card_header}>

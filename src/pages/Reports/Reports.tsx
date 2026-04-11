@@ -9,17 +9,18 @@ import FinancialOverview from "./FinancialOverview/FinancialOverview";
 import { getReports } from "@/services/reportService";
 import { toast } from "react-toastify";
 import { useQuery } from "@tanstack/react-query";
+import { useCategories } from "@/hooks/useCategories";
 
 const Reports = () => {
 	const { category, timePeriod, setCategory, setTimePeriod } = useReportsStore();
-
+	const { data: categoriesData, isLoading: isCategoriesLoading } = useCategories();
 	const filters = [
 		{
 			id: "1",
 			name: "category",
 			value: category || {},
 			setValue: setCategory,
-			options: AppConstants?.reportsFilters?.category?.options || [],
+			options: categoriesData || [],
 		},
 		{
 			id: "2",

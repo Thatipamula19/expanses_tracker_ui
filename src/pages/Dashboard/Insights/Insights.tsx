@@ -8,7 +8,7 @@ import { getOverview } from "@/services/transactionService";
 const Insights = () => {
 
 	const { data, isLoading, error } = useQuery({
-		queryKey: ["budgets-insights"],
+		queryKey: ["transactions-insights"],
 		queryFn: async () => {
 			const data = await getOverview({
 				trend_months: 6
@@ -32,7 +32,7 @@ const Insights = () => {
 						{/* <span>Monthly trend</span> */}
 					</div>
 
-					<DynamicLineChart data={data?.income_vs_expense?.data || []} />
+					<DynamicLineChart data={data?.income_vs_expense?.data || []} chartKeys={data?.income_vs_expense?.chart_keys} />
 				</div>
 				<div className={classes.card}>
 					<div className={classes.card_header}>

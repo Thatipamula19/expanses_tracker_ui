@@ -33,17 +33,17 @@ const data = [
 	},
 ];
 
-const DynamicLineChart = ({ data }: { data: any[]; }) => {
+const 	DynamicLineChart = ({ data, chartKeys }: { data: any[]; chartKeys: any }) => {
 	return (
 		<>
 			<LineChart style={{ width: "100%", maxWidth: "600px", maxHeight: "300px", aspectRatio: 1.618 }} data={data}>
 				<CartesianGrid vertical={false} strokeDasharray="3 3" stroke="#EBEBEB" />
-				<XAxis dataKey="month" padding={{ left: 30, right: 30 }} stroke="#CCCCCC" />
+				<XAxis dataKey={chartKeys?.x_axis} padding={{ left: 30, right: 30 }} stroke="#CCCCCC" />
 				<YAxis
 					width={60}
 					stroke="#CCCCCC"
-					domain={[1000, 28000]}
-					ticks={[1000, 5000, 10000, 15000, 20000, 22000, 24000, 26000, 28000]}
+					domain={[0, 28000]}
+					ticks={[0, 500, 1000, 5000, 10000, 15000, 20000, 22000, 24000, 26000, 28000]}
 				/>
 				<Tooltip
 					cursor={{ stroke: "#64748B" }}
@@ -54,7 +54,7 @@ const DynamicLineChart = ({ data }: { data: any[]; }) => {
 
 				<Line
 					type="monotone"
-					dataKey="Budget (₹)"
+					dataKey={chartKeys?.lines?.[0]}
 					// height={2}
 					stroke="#3366CC"
 					strokeWidth={2}
@@ -63,7 +63,7 @@ const DynamicLineChart = ({ data }: { data: any[]; }) => {
 				/>
 				<Line
 					type="monotone"
-					dataKey="Spent (₹)"
+					dataKey={chartKeys?.lines?.[1]}
 					stroke="#DC3912"
 					strokeWidth={2}
 					dot={false}

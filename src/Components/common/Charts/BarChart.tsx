@@ -89,7 +89,7 @@ const SimpleBarChart = ({ data }: { data: any[] }) => {
 					tickLine={false}
 					tick={{ fill: "#64748b", fontSize: 12 }}
 					domain={[0, 200000]}
-					ticks={[0, 1000, 50000, 100000, 150000, 200000]}
+					ticks={[0, 500, 1000, 50000, 100000, 150000, 200000]}
 				/>
 				<Tooltip
 					cursor={{ fill: "transparent" }}
