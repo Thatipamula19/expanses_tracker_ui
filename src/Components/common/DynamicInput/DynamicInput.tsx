@@ -25,6 +25,7 @@ const DynamicInput = <T extends FieldValues>({
 	register,
 	rules,
 	error,
+	disabled
 }: dynamicInputProps<T>) => {
 	return (
 		<div className={classes?.error_input_box}>
@@ -35,7 +36,7 @@ const DynamicInput = <T extends FieldValues>({
 					placeholder={placeholder}
 					className={classes?.dynamic_input}
 					{...(register && register(name!, rules))}
-					disabled
+					disabled={disabled}
 				/>
 				{iconRight && (
 					<img src={iconRight} alt="icon right" className={classes?.icon_right} onClick={rightIconHandler} />

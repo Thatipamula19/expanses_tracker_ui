@@ -13,6 +13,7 @@ import classes from "./transaction.module.css";
 import { useQuery } from "@tanstack/react-query";
 import { getFilteredTransactions } from "@/services/transactionService";
 import { toast } from "react-toastify";
+import TableSkeleton from "@/Components/common/Skeleton/TableSkeleton/TableSkeleton";
 
 const Transactions = () => {
 	const { data: categoriesData } = useCategories();
@@ -62,7 +63,7 @@ const Transactions = () => {
 
 	const [open, setOpen] = useState<boolean>(false);
 
-	const { data, error } = useQuery({
+	const { data, error , isLoading } = useQuery({
 		queryKey: ["transactions", date?.value, category?.value, transactionType, sort, pagination?.current],
 		queryFn: async () => {
 			const data = await getFilteredTransactions({
@@ -94,7 +95,7 @@ const Transactions = () => {
 					ctaHandler={() => setOpen(true)}
 				/>
 				<Filter filters={filters} />
-				<Table transactions={data?.transactions?.data || []} />
+				{ isLoading ? <TableSkeleton /> : <Table transactions={data?.transactions?.data || []} />}
 				<Pagination
 					total={data?.transactions?.meta?.totalPages || 1}
 					currentPage={data?.transactions?.meta?.currentPage || 1}
