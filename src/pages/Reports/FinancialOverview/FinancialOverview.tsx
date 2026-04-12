@@ -2,8 +2,9 @@ import classes from "./financialOverview.module.css";
 import DynamicLineChart from "@/Components/common/Charts/LineChart";
 import DynamicPieChart from "@/Components/common/Charts/PieChart";
 import SimpleBarChart from "@/Components/common/Charts/BarChart";
+import { LineChartSkeleton, PieChartSkeleton } from "@/Components/common/Skeleton/ChartsSkeleton/ChartsSkeleton";
 
-const FinancialOverview = ({ reportData }: { reportData: any; isLoading: boolean; error: any }) => {
+const FinancialOverview = ({ reportData, isLoading }: { reportData: any; isLoading: boolean; error: any }) => {
 	return (
 		<section className={classes?.financial_sec}>
 			<div className={classes.cards}>
@@ -13,14 +14,14 @@ const FinancialOverview = ({ reportData }: { reportData: any; isLoading: boolean
 						{/* <span>Monthly trend</span> */}
 					</div>
 
-					<DynamicLineChart data={reportData?.income_vs_expense?.data || []} chartKeys={reportData?.income_vs_expense?.chart_keys} />
+					{isLoading ? <LineChartSkeleton /> : <DynamicLineChart data={reportData?.income_vs_expense?.data || []} chartKeys={reportData?.income_vs_expense?.chart_keys} />}
 				</div>
 				<div className={classes.card}>
 					<div className={classes.card_header}>
 						<strong>Spending by Category</strong>
 					</div>
 
-					<SimpleBarChart data={reportData?.spending_by_category?.data || []} />
+					{isLoading ? <LineChartSkeleton /> : <SimpleBarChart data={reportData?.spending_by_category?.data || []} />}
 				</div>
 			</div>
 			<div className={classes?.cards}>
@@ -30,7 +31,7 @@ const FinancialOverview = ({ reportData }: { reportData: any; isLoading: boolean
 						{/* <span>Monthly trend</span> */}
 					</div>
 
-					<DynamicPieChart data={reportData?.top_5_expenses?.data || []} />
+					{isLoading ? <PieChartSkeleton /> : <DynamicPieChart data={reportData?.top_5_expenses?.data || []} />}
 				</div>
 			</div>
 		</section>

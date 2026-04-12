@@ -2,20 +2,26 @@ import AppConstants from "@/utils/AppConstants";
 import classes from "./stats.module.css";
 import { useQuery } from "@tanstack/react-query";
 import { getStats } from "@/services/transactionService";
+import StatsCardSkeleton from "@/Components/common/Skeleton/StatsCardSkeleton/StatsCardSkeleton";
 
 const Status = () => {
-	const { data } = useQuery({
+	const { data, isLoading } = useQuery({
 		queryKey: ["status"],
 		queryFn: async () => {
 			const data = await getStats();
 			return data;
 		},
-		staleTime: 1000 * 60 * 60, // 1 hour
+		staleTime: 1000 * 60 * 60, 
 	});
 
-	console.log(data);
-
 	const { savings_rate, total_balance, total_expense, total_income } = data || {};
+
+	if (isLoading) {
+		return (
+			<StatsCardSkeleton />
+		);
+	}
+
 	return (
 		<section className={classes?.status_sec}>
 			<ul className={classes?.status_list}>

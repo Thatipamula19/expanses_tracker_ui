@@ -15,6 +15,8 @@ import { getFilteredBudgets } from "@/services/budgetService";
 import { useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import { useCategories } from "@/hooks/useCategories";
+import StatsCardSkeleton from "@/Components/common/Skeleton/StatsCardSkeleton/StatsCardSkeleton";
+import TableSkeleton from "@/Components/common/Skeleton/TableSkeleton/TableSkeleton";
 
 const Budget = () => {
 	const { date, category, setCategory, setDate, pagination, setPagination } = useBudgetStore();
@@ -37,7 +39,7 @@ const Budget = () => {
 		},
 	];
 
-	const { data, error } = useQuery({
+	const { data, error, isLoading } = useQuery({
 		queryKey: ["budgets", date?.value, category?.value, pagination?.current],
 		queryFn: async () => {
 			const data = await getFilteredBudgets({
@@ -68,8 +70,8 @@ const Budget = () => {
 					ctaHandler={() => setOpen(true)}
 				/>
 				<Filter filters={filters} />
-				<Stats />
-				<Table data={data?.data || []} />
+				{ isLoading ? <StatsCardSkeleton count={3} /> : <Stats />}
+				{ isLoading ? <TableSkeleton /> : <Table data={data?.data || []} />}
 				<Pagination
 					total={data?.meta?.totalPages || 1}
 					currentPage={data?.meta?.currentPage || 1}

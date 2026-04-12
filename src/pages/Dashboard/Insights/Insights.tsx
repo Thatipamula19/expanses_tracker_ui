@@ -4,10 +4,11 @@ import DynamicPieChart from "@/Components/common/Charts/PieChart";
 import { useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import { getOverview } from "@/services/transactionService";
+import { LineChartSkeleton, PieChartSkeleton } from "@/Components/common/Skeleton/ChartsSkeleton/ChartsSkeleton";
 
 const Insights = () => {
 
-	const { data, error } = useQuery({
+	const { data, error, isLoading } = useQuery({
 		queryKey: ["transactions-insights"],
 		queryFn: async () => {
 			const data = await getOverview({
@@ -22,6 +23,7 @@ const Insights = () => {
 		},
 		staleTime: 1000 * 60 * 5,
 	});
+
 	return (
 		<section className={classes.budget_insights_sec}>
 			<h2 className={classes.title}>Spending Overview</h2>
@@ -32,14 +34,14 @@ const Insights = () => {
 						{/* <span>Monthly trend</span> */}
 					</div>
 
-					<DynamicLineChart data={data?.income_vs_expense?.data || []} chartKeys={data?.income_vs_expense?.chart_keys} />
+					{ isLoading ? <LineChartSkeleton /> : <DynamicLineChart data={data?.income_vs_expense?.data || []} chartKeys={data?.income_vs_expense?.chart_keys} />}
 				</div>
 				<div className={classes.card}>
 					<div className={classes.card_header}>
 						<strong>Expense Breakdown</strong>
 					</div>
 
-					<DynamicPieChart data={data?.expense_breakdown?.data || []} />
+					{ isLoading ? <PieChartSkeleton /> : <DynamicPieChart data={data?.expense_breakdown?.data || []} />}
 				</div>
 			</div>
 		</section>

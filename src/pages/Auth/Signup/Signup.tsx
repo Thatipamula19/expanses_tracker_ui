@@ -156,6 +156,7 @@ const Signup = () => {
 							validate: (value) => value === watch("password") || "Passwords do not match",
 						}}
 						error={errors.confirmPassword?.message || ""}
+						disabled={isPending}
 					/>
 					<AuthButton name="SIGN UP" type="submit" disabled={!getIsValid()} loading={isPending} />
 					<div className={classes?.signup_or_line}>

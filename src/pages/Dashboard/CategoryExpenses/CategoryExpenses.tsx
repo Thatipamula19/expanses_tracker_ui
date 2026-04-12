@@ -5,9 +5,11 @@ import { useQuery } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
 import AppConstants from '@/utils/AppConstants';
 import Table from './Table/Table';
+import BudgetCardSkeleton from '@/Components/common/Skeleton/BudgetCardSkeleton/BudgetCardSkeleton';
+import TransactionListSkeleton from '@/Components/common/Skeleton/TransactionListSkeleton/TransactionListSkeleton';
 
 const CategoryExpenses = () => {
-    const { data, error } = useQuery({
+    const { data, error, isLoading } = useQuery({
         queryKey: ["category-expenses"],
         queryFn: async () => {
             const data = await getCategoryWiseExpenses({
@@ -29,7 +31,7 @@ const CategoryExpenses = () => {
                 <div className={classes.expenses_container}>
                     <div>
                         <h2 className={classes.title}>Category-wise Expenses</h2>
-                        <div className={classes.expenses_list}>
+                        {isLoading ? <BudgetCardSkeleton /> : <div className={classes.expenses_list}>
                             {
                                 data?.categories?.map((item: any) => (
                                     <div className={classes.expense_card} key={`category_${item.category_id}`}>
@@ -44,11 +46,11 @@ const CategoryExpenses = () => {
                                     </div>
                                 ))
                             }
-                        </div>
+                        </div>}
                     </div>
                     <div>
                         <h2 className={classes?.title}>Latest Transactions</h2>
-                        <Table data={data} />
+                        { isLoading ? <TransactionListSkeleton /> : <Table data={data} />}
                     </div>
                 </div>
             </section>

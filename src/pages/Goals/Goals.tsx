@@ -13,6 +13,7 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { getFilteredGoals } from "@/services/goalService";
 import { toast } from "react-toastify";
+import TableSkeleton from "@/Components/common/Skeleton/TableSkeleton/TableSkeleton";
 
 
 const Goals = () => {
@@ -36,7 +37,7 @@ const Goals = () => {
 		},
 	];
 
-	const { data, error } = useQuery({
+	const { data, error, isLoading } = useQuery({
 		queryKey: ["goals", status, timePeriod, pagination?.current],
 		queryFn: async () => {
 			const data = await getFilteredGoals({
@@ -69,13 +70,13 @@ const Goals = () => {
 					}}
 				/>
 				<Filter filters={filters} />
-				<Table data={data?.goals || []} />
+				{ isLoading ? <TableSkeleton /> : <Table data={data?.goals || []} />}
 				<Pagination
 					total={data?.meta?.totalPages || 1}
 					currentPage={data?.meta?.currentPage || 1}
 					onChangePage={(page) => setPagination({ ...pagination, current: page })}
 				/>
-				<ProgressOverview />
+				{/* <ProgressOverview /> */}
 			</main>
 			{open && <CreateGoal open={open} setOpen={setOpen} type="Add" />}
 			<Footer />
