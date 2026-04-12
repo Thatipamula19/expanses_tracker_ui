@@ -13,6 +13,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import AuthLayout from "../AuthLayout/AuthLayout";
 import classes from "./signin.module.css";
+import { toast } from "react-toastify";
 
 const Signin = () => {
 	const navigate = useNavigate();
@@ -28,7 +29,7 @@ const Signin = () => {
 	const { email, lock, eyeClose, eyeOpen } = AppConstants.icons;
 
 	const handleClickSignup = () => {
-		window.location.href = "/sign-up";
+		navigate("/sign-up");
 	};
 
 	const handleSignin = async (data: SignInFormTypes) => {
@@ -50,11 +51,12 @@ const Signin = () => {
 			}
 			setUser(user);
 			setCookies("user_info", JSON.stringify(user), 24 * 60);
+			toast.success(data?.message);
 			navigate("/");
 		},
 
-		onError: (error) => {
-			console.log(error);
+		onError: (error: any) => {
+			toast.error(error?.err_msg);
 		},
 	});
 

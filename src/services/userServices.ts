@@ -46,7 +46,16 @@ export const refreshToken = async (payload: { refresh_token: string }) => {
 
 export const getUserInfo = async () => {
 	try {
-		const response = await api.get("auth/user-info", { withAuth: true } as ApiOptions );
+		const response = await api.get("users/profile", { withAuth: true } as ApiOptions );
+		return response?.data;
+	} catch (error) {
+		throw serviceErrorHandler(error);
+	}
+};
+
+export const updateUserInfo = async (data: any) => {
+	try {
+		const response = await api.put("users/update-profile", data, { withAuth: true } as ApiOptions);
 		return response?.data;
 	} catch (error) {
 		throw serviceErrorHandler(error);
@@ -74,6 +83,15 @@ export const resetPassword = async (data: any) => {
 export const changePassword = async (data: any) => {
 	try {
 		const response = await api.post("auth/change-password", data, { withAuth: true } as ApiOptions);
+		return response?.data;
+	} catch (error) {
+		throw serviceErrorHandler(error);
+	}
+};
+
+export const logOut = async () => {
+	try {
+		const response = await api.post("auth/logout", {}, { withAuth: true } as ApiOptions);
 		return response?.data;
 	} catch (error) {
 		throw serviceErrorHandler(error);

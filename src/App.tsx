@@ -10,6 +10,7 @@ const Budget = lazy(() => import('./pages/Budget/Budget'));
 const Goals = lazy(() => import('./pages/Goals/Goals'));
 const Reports = lazy(() => import('./pages/Reports/Reports'));
 const Transactions = lazy(() => import('./pages/Transactions/Transactions'));
+const UserProfile = lazy(() => import('./pages/UserProfile/UserProfile'));
 import useAuthStore from "./store/useAuthStore";
 import Toaster from "./Components/common/Toaster/Toaster";
 
@@ -41,6 +42,7 @@ function App() {
 						path="/reset-password"
 						element={!isAuthenticated ? <ResetPassword /> : <Navigate to="/" />}
 					/>
+					<Route path="/user-profile" element={isAuthenticated ? <UserProfile /> : <Navigate to="/sign-in" />} />
 				</Routes>
 				<Toaster />
 			</BrowserRouter>

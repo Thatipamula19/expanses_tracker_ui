@@ -1,0 +1,65 @@
+.user_info {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0px 6px 18px 0px #0206170f;
+    align-items: center;
+}
+
+.user_info .user_img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.user_info .user_name {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.user_info .user_email {
+    font-size: 16px;
+    color: #64748b;
+}
+
+.user_info p {
+    margin: 0;
+}
+
+.user_info .user_actions {
+    display: flex;
+    gap: 1rem;
+}
+
+.user_info .user_actions .edit_btn {
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: none;
+    color: #ffffff;
+    background-color: #00B894;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.user_info .user_actions .change_pass_btn {
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: none;
+    color: #1E293B;
+    background-color: #E2E8F0;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.user_info .user_actions .logout_btn {
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: none;
+    color: #ffffff;
+    background-color: #EF4444;
+    font-weight: 500;
+    cursor: pointer;
+}
