@@ -1,0 +1,49 @@
+.profile_settings_card {
+    padding: 30px 50px;
+    border-radius: 20px;
+    background-color: #fff;
+    box-shadow: 0px 10px 40px 0px #00000026;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile_settings_card .profile_settings_body {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.profile_settings_card .profile_row {
+    display: grid;
+    grid-template-columns: 190px 1fr;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.5rem;
+}
+
+.profile_settings_card .profile_row .profile_label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #1e293b;
+}
+
+.profile_settings_card .profile_row .profile_value {
+    font-size: 14px;
+    font-weight: 400;
+    color: #64748b;
+}
+
+.profile_settings_card .profile_row .checkbox_list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.profile_settings_card .profile_row .checkbox_list .checkbox_item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: #2d3748;
+}

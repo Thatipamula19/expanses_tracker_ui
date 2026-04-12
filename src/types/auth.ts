@@ -10,6 +10,16 @@ export type SignUpFormTypes = {
 	confirmPassword?: string;
 };
 
+export type ResetPasswordFormTypes = {
+	password: string;
+	confirmPassword?: string;
+	token: string | null;
+};
+
+export type forgotPasswordFormTypes = {
+	email: string;
+};
+
 export type AuthBtnType = "submit" | "reset" | "button" | undefined;
 
 export type AuthBtnProps = {

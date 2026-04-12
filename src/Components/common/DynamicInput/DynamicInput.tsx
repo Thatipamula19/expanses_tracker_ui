@@ -12,6 +12,7 @@ interface dynamicInputProps<T extends FieldValues> {
 	register?: UseFormRegister<T>;
 	rules?: RegisterOptions<T>;
 	error?: string;
+	disabled?: boolean;
 }
 
 const DynamicInput = <T extends FieldValues>({
@@ -34,6 +35,7 @@ const DynamicInput = <T extends FieldValues>({
 					placeholder={placeholder}
 					className={classes?.dynamic_input}
 					{...(register && register(name!, rules))}
+					disabled
 				/>
 				{iconRight && (
 					<img src={iconRight} alt="icon right" className={classes?.icon_right} onClick={rightIconHandler} />

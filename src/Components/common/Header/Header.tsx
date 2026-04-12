@@ -1,7 +1,7 @@
 import AppConstants from "@/utils/AppConstants";
 import HoverBtn from "../HoverBtn/HoverBtn";
 import classes from "./header.module.css";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { MenuIcon } from "@/assets/svgs";
 import MobileDrawer from "./MobileDrawer/MobileDrawer";
 import { useState } from "react";
@@ -32,6 +32,7 @@ const navItems = [
 const Header = () => {
 	const [isOpen, setIsOpen] = useState(false);
 	const location = useLocation();
+	const navigate = useNavigate();
 	return (
 		<>
 			<nav className={classes?.header_container}>
@@ -57,9 +58,13 @@ const Header = () => {
 					/> */}
 
 					<HoverBtn
-						img={AppConstants.icons.user}
+						img={ location.pathname === "/user-profile" ? AppConstants.icons.userHover : AppConstants.icons.user}
 						imgHover={AppConstants.icons.userHover}
-						clickHandler={() => {}}
+						clickHandler={() => {
+							if (location.pathname !== "/user-profile") {
+								navigate("/user-profile");
+							}
+						}}
 					/>
 				</div>
 				<button className={classes?.mob_menu_btn} onClick={() => setIsOpen(!isOpen)}>
