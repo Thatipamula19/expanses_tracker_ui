@@ -1,6 +1,6 @@
 import AppConstants from "@/utils/AppConstants";
 import classes from "./input.module.css";
-import { forwardRef, useEffect, useRef, useState, type InputHTMLAttributes, type TextareaHTMLAttributes } from "react";
+import { forwardRef, useEffect, useRef, useState } from "react";
 import type { FilterType } from "@/types/transactions";
 
 /* ================= TYPES ================= */
@@ -10,15 +10,13 @@ type BaseProps = {
 	halfWidth?: boolean;
 };
 
-type TextInputProps = BaseProps &
-	InputHTMLAttributes<HTMLInputElement> & {
-		type?: "text" | "date" | "number";
-	};
+type TextInputProps = BaseProps & React.InputHTMLAttributes<HTMLInputElement> & {
+	type?: "text" | "password" | "email" | "number" | "date" | "search" | "tel";
+};
 
-type TextareaProps = BaseProps &
-	TextareaHTMLAttributes<HTMLTextAreaElement> & {
-		type: "textarea";
-	};
+type TextareaProps = BaseProps & React.TextareaHTMLAttributes<HTMLTextAreaElement> & {
+	type: "textarea";
+};
 
 type SelectProps = BaseProps & {
 	type: "select";
@@ -30,6 +28,7 @@ type SelectProps = BaseProps & {
 
 type InputProps = TextInputProps | TextareaProps | SelectProps;
 
+
 /* ================= MAIN COMPONENT ================= */
 
 const Input = forwardRef<HTMLInputElement | HTMLTextAreaElement, InputProps>((props, ref) => {
@@ -37,7 +36,8 @@ const Input = forwardRef<HTMLInputElement | HTMLTextAreaElement, InputProps>((pr
 
 	const renderInput = () => {
 		if (type === "textarea") {
-			return <Textarea placeholder={placeholder}  {...props} ref={ref as any} />;
+			const textareaProps = props as TextareaProps;
+			return <Textarea placeholder={placeholder}  {...textareaProps} ref={ref as React.Ref<HTMLTextAreaElement>} />;
 		}
 
 		if (type === "select") {

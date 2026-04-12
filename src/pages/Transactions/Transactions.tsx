@@ -15,7 +15,7 @@ import { getFilteredTransactions } from "@/services/transactionService";
 import { toast } from "react-toastify";
 
 const Transactions = () => {
-	const { data: categoriesData, isLoading: isCategoriesLoading } = useCategories();
+	const { data: categoriesData } = useCategories();
 	const {
 		date,
 		category,
@@ -62,7 +62,7 @@ const Transactions = () => {
 
 	const [open, setOpen] = useState<boolean>(false);
 
-	const { data, isLoading, error } = useQuery({
+	const { data, error } = useQuery({
 		queryKey: ["transactions", date?.value, category?.value, transactionType, sort, pagination?.current],
 		queryFn: async () => {
 			const data = await getFilteredTransactions({

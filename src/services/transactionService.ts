@@ -34,7 +34,7 @@ export const getOverview = async (params: any) => {
 
 export const getCategoryWiseExpenses = async (params: any) => {
 	try {
-		const res = await api.get("transactions/get-category-wise-expenses", {
+		const res = await api.get("transactions/category-wise-expenses", {
 			withAuth: true,
 			params: params,
 		} as ApiOptions);

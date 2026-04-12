@@ -1,3 +1,9 @@
 .dashboard_main {
 	padding: 30px 100px;
 }
+
+@media screen and (max-width: 768px) {
+	.dashboard_main {
+		padding: 30px 20px;
+	}
+}

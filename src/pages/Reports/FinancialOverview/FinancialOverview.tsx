@@ -1,37 +1,36 @@
-import React from "react";
-
 import classes from "./financialOverview.module.css";
 import DynamicLineChart from "@/Components/common/Charts/LineChart";
 import DynamicPieChart from "@/Components/common/Charts/PieChart";
+import SimpleBarChart from "@/Components/common/Charts/BarChart";
 
-const FinancialOverview = () => {
+const FinancialOverview = ({ reportData }: { reportData: any; isLoading: boolean; error: any }) => {
 	return (
 		<section className={classes?.financial_sec}>
 			<div className={classes.cards}>
 				<div className={classes.card}>
 					<div className={classes.card_header}>
-						<strong>Budget vs Spending Over Time</strong>
-						<span>Monthly trend</span>
+						<strong>Income vs Expense</strong>
+						{/* <span>Monthly trend</span> */}
 					</div>
 
-					<DynamicLineChart />
+					<DynamicLineChart data={reportData?.income_vs_expense?.data || []} chartKeys={reportData?.income_vs_expense?.chart_keys} />
 				</div>
 				<div className={classes.card}>
 					<div className={classes.card_header}>
-						<strong>Category-wise Budget Allocation</strong>
+						<strong>Spending by Category</strong>
 					</div>
 
-					<DynamicPieChart />
+					<SimpleBarChart data={reportData?.spending_by_category?.data || []} />
 				</div>
 			</div>
 			<div className={classes?.cards}>
 				<div className={classes.card}>
 					<div className={classes.card_header}>
-						<strong>Budget vs Spending Over Time</strong>
-						<span>Monthly trend</span>
+						<strong>Top 5 Expenses</strong>
+						{/* <span>Monthly trend</span> */}
 					</div>
 
-					<DynamicLineChart />
+					<DynamicPieChart data={reportData?.top_5_expenses?.data || []} />
 				</div>
 			</div>
 		</section>

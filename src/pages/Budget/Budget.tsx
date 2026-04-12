@@ -11,63 +11,15 @@ import BudgetInsights from "./BudgetInsights/BudgetInsights";
 import CreateBudget from "./CreateBudget/CreateBudget";
 import Stats from "./Stats/Stats";
 import Table from "./Table/Table";
-
-const statsData = [
-	{
-		id: "1",
-		title: "Total Budget",
-		value: 10000,
-		desc: "for Oct 2025",
-	},
-	{
-		id: "2",
-		title: "Total Spent",
-		value: 5000,
-		spentValue: 8,
-	},
-	{
-		id: "3",
-		title: "Remaining",
-		value: 5000,
-		used: 72,
-	},
-];
-
-const budgetData = [
-	{
-		id: "1",
-		date: "15 Oct 2025",
-		category: "food",
-		limit: 1000,
-		spent: 1200,
-	},
-	{
-		id: "2",
-		date: "15 Oct 2025",
-		category: "transport",
-		limit: 500,
-		spent: 200,
-	},
-	{
-		id: "3",
-		date: "15 Oct 2025",
-		category: "entertainment",
-		limit: 200,
-		spent: 100,
-	},
-	{
-		id: "4",
-		date: "15 Oct 2025",
-		category: "health",
-		limit: 500,
-		spent: 400,
-	},
-];
+import { getFilteredBudgets } from "@/services/budgetService";
+import { useQuery } from "@tanstack/react-query";
+import { toast } from "react-toastify";
+import { useCategories } from "@/hooks/useCategories";
 
 const Budget = () => {
 	const { date, category, setCategory, setDate, pagination, setPagination } = useBudgetStore();
 	const [open, setOpen] = useState<boolean>(false);
-
+	const { data: categoriesData } = useCategories();
 	const filters = [
 		{
 			id: 1,
@@ -81,9 +33,29 @@ const Budget = () => {
 			name: "Category",
 			value: category,
 			setValue: setCategory,
-			options: AppConstants?.budgetFilters?.category?.options || [],
+			options: categoriesData || [],
 		},
 	];
+
+	const { data, error } = useQuery({
+		queryKey: ["budgets", date?.value, category?.value, pagination?.current],
+		queryFn: async () => {
+			const data = await getFilteredBudgets({
+				period: date?.value,
+				limit: 2,
+				category_id: category?.value === "all" ? undefined : category?.value,
+				page: pagination?.current,
+			});
+
+			if (error) {
+				toast.error(data?.error);
+			}
+
+			return data;
+		},
+		staleTime: 1000 * 60 * 5,
+	});
+	
 	return (
 		<>
 			<Header />
@@ -96,11 +68,11 @@ const Budget = () => {
 					ctaHandler={() => setOpen(true)}
 				/>
 				<Filter filters={filters} />
-				<Stats statsData={statsData} />
-				<Table data={budgetData} />
+				<Stats />
+				<Table data={data?.data || []} />
 				<Pagination
-					total={pagination?.total}
-					currentPage={pagination?.current}
+					total={data?.meta?.totalPages || 1}
+					currentPage={data?.meta?.currentPage || 1}
 					onChangePage={(page) => setPagination({ ...pagination, current: page })}
 				/>
 				<BudgetInsights />
