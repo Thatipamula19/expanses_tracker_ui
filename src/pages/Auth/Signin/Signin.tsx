@@ -1,4 +1,4 @@
-import googleIcon from "@/assets/authIcons/google.svg";
+// import googleIcon from "@/assets/authIcons/google.svg";
 import logoLight from "@/assets/logos/logo_light.svg";
 import AuthButton from "@/Components/common/AuthButton/AuthButton";
 import DynamicInput from "@/Components/common/DynamicInput/DynamicInput";
@@ -71,8 +71,8 @@ const Signin = () => {
 		<AuthLayout>
 			<div className={classes?.signin_left}>
 				<h1 className={classes?.signin_title}>Sign in to FinTrack</h1>
-				<img src={googleIcon} alt="google icon" className={classes?.signin_google} />
-				<span className={classes?.signin_or}>or use your account</span>
+				{/* <img src={googleIcon} alt="google icon" className={classes?.signin_google} />
+				<span className={classes?.signin_or}>or use your account</span> */}
 				<form className={classes?.signin_form} onSubmit={handleSubmit(handleSignin)}>
 					<DynamicInput
 						iconLeft={email}
@@ -88,6 +88,7 @@ const Signin = () => {
 							},
 						}}
 						error={errors.email ? errors.email?.message : ""}
+						disabled={isPending}
 					/>
 					<DynamicInput
 						iconLeft={lock}
@@ -113,6 +114,7 @@ const Signin = () => {
 							},
 						}}
 						error={errors.password ? errors.password?.message : ""}
+						disabled={isPending}
 					/>
 					<a href="/forgot-password" className={classes?.signin_forgot}>
 						Forgot your password?

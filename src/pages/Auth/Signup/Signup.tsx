@@ -1,4 +1,4 @@
-import googleIcon from "@/assets/authIcons/google.svg";
+// import googleIcon from "@/assets/authIcons/google.svg";
 import logoLight from "@/assets/logos/logo_light.svg";
 import AuthButton from "@/Components/common/AuthButton/AuthButton";
 import DynamicInput from "@/Components/common/DynamicInput/DynamicInput";
@@ -79,8 +79,8 @@ const Signup = () => {
 			</div>
 			<div className={classes?.signup_right}>
 				<h1 className={classes?.signup_title}>Create Account</h1>
-				<img src={googleIcon} alt="google icon" className={classes?.signup_google} />
-				<span className={classes?.signup_or}>or use your email for registration</span>
+				{/* <img src={googleIcon} alt="google icon" className={classes?.signup_google} />
+				<span className={classes?.signup_or}>or use your email for registration</span> */}
 				<form className={classes?.signup_form} onSubmit={handleSubmit(handleSignup)}>
 					<DynamicInput
 						placeholder="Name"
@@ -99,6 +99,7 @@ const Signup = () => {
 							},
 						}}
 						error={errors.user_name ? errors.user_name?.message : ""}
+						disabled={isPending}
 					/>
 					<DynamicInput
 						iconLeft={email}
@@ -114,6 +115,7 @@ const Signup = () => {
 							},
 						}}
 						error={errors.email ? errors.email?.message : ""}
+						disabled={isPending}
 					/>
 					<DynamicInput
 						iconLeft={lock}
@@ -139,6 +141,7 @@ const Signup = () => {
 							},
 						}}
 						error={errors.password ? errors.password?.message : ""}
+						disabled={isPending}
 					/>
 					<DynamicInput
 						iconLeft={lock}
