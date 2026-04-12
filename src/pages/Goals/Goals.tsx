@@ -14,48 +14,6 @@ import { useQuery } from "@tanstack/react-query";
 import { getFilteredGoals } from "@/services/goalService";
 import { toast } from "react-toastify";
 
-const goalsData = [
-	{
-		id: "1",
-		title: "Save for a down payment",
-		start_date: "15 Oct 2025",
-		end_date: "31 Oct 2025",
-		category: "bills",
-		target: 300,
-		saved: 100,
-		status: "Ongoing",
-	},
-	{
-		id: "2",
-		title: "Buy a New Laptop",
-		start_date: "15 Oct 2025",
-		end_date: "31 Oct 2025",
-		category: "education",
-		target: 49999,
-		saved: 15999,
-		status: "Ongoing",
-	},
-	{
-		id: "3",
-		title: "Save for a New Car",
-		start_date: "15 Oct 2025",
-		end_date: "31 Oct 2025",
-		category: "transport",
-		target: 100000,
-		saved: 50000,
-		status: "completed",
-	},
-	{
-		id: "4",
-		title: "Buy a New Phone",
-		start_date: "15 Oct 2025",
-		end_date: "31 Oct 2025",
-		category: "other",
-		target: 19999,
-		saved: 15999,
-		status: "Ongoing",
-	},
-];
 
 const Goals = () => {
 	const { status, timePeriod, pagination, setStatus, setTimePeriod, setPagination } = useGoalsStore();
@@ -78,7 +36,7 @@ const Goals = () => {
 		},
 	];
 
-	const { data, isLoading, error } = useQuery({
+	const { data, error } = useQuery({
 		queryKey: ["goals", status, timePeriod, pagination?.current],
 		queryFn: async () => {
 			const data = await getFilteredGoals({

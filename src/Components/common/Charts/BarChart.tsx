@@ -1,39 +1,5 @@
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 
-// #region Sample data
-const data = [
-	{
-		name: "Buy a New Laptop",
-		saved: 50000,
-		remaining: 30000,
-	},
-	{
-		name: "Emergency Fund",
-		saved: 40000,
-		remaining: 60000,
-	},
-	{
-		name: "Vacation Trip",
-		saved: 60000,
-		remaining: 0,
-	},
-	{
-		name: "Home Renovation",
-		saved: 90000,
-		remaining: 60000,
-	},
-	{
-		name: "Buy a Bike",
-		saved: 70000,
-		remaining: 50000,
-	},
-	{
-		name: "Investment Portfolio",
-		saved: 160000,
-		remaining: 40000,
-	},
-];
-
 const WrappedTick = (props: any) => {
 	const { x, y, payload } = props;
 	const words = payload.value.split(" ");

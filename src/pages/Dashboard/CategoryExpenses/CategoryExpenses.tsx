@@ -7,7 +7,7 @@ import AppConstants from '@/utils/AppConstants';
 import Table from './Table/Table';
 
 const CategoryExpenses = () => {
-    const { data, isLoading, error } = useQuery({
+    const { data, error } = useQuery({
         queryKey: ["category-expenses"],
         queryFn: async () => {
             const data = await getCategoryWiseExpenses({

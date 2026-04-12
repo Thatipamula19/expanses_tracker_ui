@@ -1,15 +1,15 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
-
-import ForgotPassword from "./pages/Auth/ForgotPassword/ForgotPassword";
-import ResetPassword from "./pages/Auth/ResetPassword/ResetPassword";
-import Signin from "./pages/Auth/Signin/Signin";
-import Signup from "./pages/Auth/Signup/Signup";
-import Budget from "./pages/Budget/Budget";
-import Dashboard from "./pages/Dashboard/Dashboard";
-import Goals from "./pages/Goals/Goals";
-import Reports from "./pages/Reports/Reports";
-import Transactions from "./pages/Transactions/Transactions";
+import { lazy } from "react";
+const ForgotPassword = lazy(() => import('./pages/Auth/ForgotPassword/ForgotPassword'));
+const ResetPassword = lazy(() => import('./pages/Auth/ResetPassword/ResetPassword'));
+const Signin = lazy(() => import('./pages/Auth/Signin/Signin'));
+const Signup = lazy(() => import('./pages/Auth/Signup/Signup'));
+const Dashboard = lazy(() => import('./pages/Dashboard/Dashboard'));
+const Budget = lazy(() => import('./pages/Budget/Budget'));
+const Goals = lazy(() => import('./pages/Goals/Goals'));
+const Reports = lazy(() => import('./pages/Reports/Reports'));
+const Transactions = lazy(() => import('./pages/Transactions/Transactions'));
 import useAuthStore from "./store/useAuthStore";
 import Toaster from "./Components/common/Toaster/Toaster";
 

@@ -13,7 +13,7 @@ import { useCategories } from "@/hooks/useCategories";
 
 const Reports = () => {
 	const { category, timePeriod, setCategory, setTimePeriod } = useReportsStore();
-	const { data: categoriesData, isLoading: isCategoriesLoading } = useCategories();
+	const { data: categoriesData } = useCategories();
 	const filters = [
 		{
 			id: "1",

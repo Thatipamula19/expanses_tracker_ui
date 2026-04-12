@@ -16,31 +16,10 @@ import { useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import { useCategories } from "@/hooks/useCategories";
 
-const statsData = [
-	{
-		id: "1",
-		title: "Total Budget",
-		value: 10000,
-		desc: "for Oct 2025",
-	},
-	{
-		id: "2",
-		title: "Total Spent",
-		value: 5000,
-		spentValue: 8,
-	},
-	{
-		id: "3",
-		title: "Remaining",
-		value: 5000,
-		used: 72,
-	},
-];
-
 const Budget = () => {
 	const { date, category, setCategory, setDate, pagination, setPagination } = useBudgetStore();
 	const [open, setOpen] = useState<boolean>(false);
-	const { data: categoriesData, isLoading: isCategoriesLoading } = useCategories();
+	const { data: categoriesData } = useCategories();
 	const filters = [
 		{
 			id: 1,
@@ -58,7 +37,7 @@ const Budget = () => {
 		},
 	];
 
-	const { data, isLoading, error } = useQuery({
+	const { data, error } = useQuery({
 		queryKey: ["budgets", date?.value, category?.value, pagination?.current],
 		queryFn: async () => {
 			const data = await getFilteredBudgets({
@@ -89,7 +68,7 @@ const Budget = () => {
 					ctaHandler={() => setOpen(true)}
 				/>
 				<Filter filters={filters} />
-				<Stats statsData={statsData} />
+				<Stats />
 				<Table data={data?.data || []} />
 				<Pagination
 					total={data?.meta?.totalPages || 1}

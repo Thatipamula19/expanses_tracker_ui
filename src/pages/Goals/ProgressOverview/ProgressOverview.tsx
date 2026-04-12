@@ -1,5 +1,5 @@
-import DynamicBarChart from "@/Components/common/Charts/BarChart";
-import DynamicPieChart from "@/Components/common/Charts/PieChart";
+// import DynamicBarChart from "@/Components/common/Charts/BarChart";
+// import DynamicPieChart from "@/Components/common/Charts/PieChart";
 import classes from "./progressOverview.module.css";
 
 const ProgressOverview = () => {
@@ -13,13 +13,13 @@ const ProgressOverview = () => {
 						{/* <span>Monthly trend</span> */}
 					</div>
 
-					<DynamicBarChart />
+					{/* <DynamicBarChart /> */}
 				</div>
 				<div className={classes.card}>
 					<div className={classes.card_header}>
 						<strong>Completed vs Ongoing Goals</strong>
 					</div>
-					<DynamicPieChart />
+					{/* <DynamicPieChart /> */}
 				</div>
 			</div>
 		</section>

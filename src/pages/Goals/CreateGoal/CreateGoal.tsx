@@ -24,7 +24,7 @@ const CreateGoal = ({
 	goal,
 }: Props) => {
 	const queryClient = useQueryClient();
-	const { register, handleSubmit, control, watch, reset } = useForm<Goal>();
+	const { register, handleSubmit, control, reset } = useForm<Goal>();
 	const { data: categoriesData = [] } = useCategories();
 
 	useEffect(() => {
@@ -40,7 +40,7 @@ const CreateGoal = ({
 		}
 	}, [goal, reset]);
 
-	const { mutate, isPending } = useMutation({
+	const { mutate } = useMutation({
 		mutationFn: (data: Goal) => (type === "Add" ? addGoal(data) : updateGoal(data)),
 
 		onSuccess: (data) => {

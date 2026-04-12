@@ -50,11 +50,11 @@ const Header = () => {
 				</ul>
 
 				<div className={classes?.profile_notification}>
-					<HoverBtn
+					{/* <HoverBtn
 						img={AppConstants.icons.notification}
 						imgHover={AppConstants.icons.notificationHover}
 						clickHandler={() => {}}
-					/>
+					/> */}
 
 					<HoverBtn
 						img={AppConstants.icons.user}

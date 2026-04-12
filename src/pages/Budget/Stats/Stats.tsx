@@ -1,4 +1,3 @@
-import type { StatsTypes } from "@/types/budgets";
 import classes from "./stats.module.css";
 import ProgressBar from "@/Components/common/ProgressBar/ProgressBar";
 import { useQuery } from "@tanstack/react-query";
@@ -6,9 +5,9 @@ import { getBudgetStatistics } from "@/services/budgetService";
 import useBudgetStore from "@/store/useBudgetStore";
 import AppConstants from "@/utils/AppConstants";
 
-const Stats = ({ statsData }: { statsData: StatsTypes[] }) => {
+const Stats = () => {
 	const { date } = useBudgetStore();
-	const { data, isLoading, error } = useQuery({
+	const { data } = useQuery({
 		queryKey: ["status", date?.value],
 		queryFn: async () => {
 			const data = await getBudgetStatistics({

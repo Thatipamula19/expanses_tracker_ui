@@ -16,9 +16,9 @@ type Props = {
 	budget?: Budget;
 };
 
-const CreateBudget = ({ open, setOpen, type, budget }: Props) => {
+const CreateBudget = ({ setOpen, type, budget }: Props) => {
 	const queryClient = useQueryClient();
-	const { register, handleSubmit, control, watch, reset } = useForm<Budget>();
+	const { register, handleSubmit, control, reset } = useForm<Budget>();
 	const { data: categoriesData = [] } = useCategories();
 
 	useEffect(() => {

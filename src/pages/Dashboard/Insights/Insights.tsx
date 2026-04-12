@@ -7,7 +7,7 @@ import { getOverview } from "@/services/transactionService";
 
 const Insights = () => {
 
-	const { data, isLoading, error } = useQuery({
+	const { data, error } = useQuery({
 		queryKey: ["transactions-insights"],
 		queryFn: async () => {
 			const data = await getOverview({

@@ -1,4 +1,3 @@
-import React from "react";
 import classes from "./budgetInsights.module.css";
 import DynamicLineChart from "@/Components/common/Charts/LineChart";
 import DynamicPieChart from "@/Components/common/Charts/PieChart";
@@ -8,7 +7,7 @@ import { toast } from "react-toastify";
 
 const BudgetInsights = () => {
 
-	const { data, isLoading, error } = useQuery({
+	const { data, error } = useQuery({
 		queryKey: ["budgets-insights"],
 		queryFn: async () => {
 			const data = await getInsights({

@@ -1,14 +1,5 @@
 import { Cell, Legend, Pie, PieChart, type PieLabelRenderProps, ResponsiveContainer, Tooltip } from "recharts";
 
-const dataV1 = [
-	{ name: "Food & Dining", value: 24 },
-	{ name: "Transport", value: 16 },
-	{ name: "Shopping", value: 20 },
-	{ name: "Bills & Utilities", value: 14 },
-	{ name: "Entertainment", value: 10 },
-	{ name: "Savings & Investments", value: 16 },
-];
-
 const RADIAN = Math.PI / 180;
 const COLORS = ["#2ecc71", "#3498db", "#f39c12", "#e74c3c", "#9b59b6", "#16a085"];
 

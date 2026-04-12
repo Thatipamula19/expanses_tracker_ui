@@ -1,11 +1,9 @@
-import React from "react";
-
 import classes from "./financialOverview.module.css";
 import DynamicLineChart from "@/Components/common/Charts/LineChart";
 import DynamicPieChart from "@/Components/common/Charts/PieChart";
 import SimpleBarChart from "@/Components/common/Charts/BarChart";
 
-const FinancialOverview = ({ reportData, isLoading, error }: { reportData: any; isLoading: boolean; error: any }) => {
+const FinancialOverview = ({ reportData }: { reportData: any; isLoading: boolean; error: any }) => {
 	return (
 		<section className={classes?.financial_sec}>
 			<div className={classes.cards}>

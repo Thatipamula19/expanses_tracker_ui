@@ -1,38 +1,5 @@
 import { CartesianGrid, Legend, Line, LineChart, Tooltip, XAxis, YAxis } from "recharts";
 
-const data = [
-	{
-		name: "Jan",
-		"Budget (₹)": 25000,
-		"Spent (₹)": 21000,
-	},
-	{
-		name: "Feb",
-		"Budget (₹)": 25000,
-		"Spent (₹)": 23500,
-	},
-	{
-		name: "Mar",
-		"Budget (₹)": 25000,
-		"Spent (₹)": 19000,
-	},
-	{
-		name: "Apr",
-		"Budget (₹)": 25000,
-		"Spent (₹)": 26300,
-	},
-	{
-		name: "May",
-		"Budget (₹)": 25000,
-		"Spent (₹)": 24100,
-	},
-	{
-		name: "Jun",
-		"Budget (₹)": 25000,
-		"Spent (₹)": 27500,
-	},
-];
-
 const 	DynamicLineChart = ({ data, chartKeys }: { data: any[]; chartKeys: any }) => {
 	return (
 		<>
