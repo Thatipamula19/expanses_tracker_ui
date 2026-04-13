@@ -5,8 +5,11 @@ import { useState } from "react";
 import CreateBudget from "../CreateBudget/CreateBudget";
 import classes from "./table.module.css";
 import DeleteItem from "@/Components/common/Modal/DeleteItem/DeleteItem";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { deleteBudget } from "@/services/budgetService";
 
 const Table = ({ data }: { data: Budget[] }) => {
+	const queryClient = useQueryClient();
 	const [open, setOpen] = useState<boolean>(false);
 	const [budget, setBudget] = useState<Budget>(null!);
 	const [deleteOpen, setDeleteOpen] = useState<boolean>(false);
@@ -21,8 +24,20 @@ const Table = ({ data }: { data: Budget[] }) => {
 		setDeleteOpen(true);
 	};
 
+
+	const { mutate, isPending } = useMutation({
+		mutationFn: () => deleteBudget(budget?.id),
+		onSuccess: () => {
+			queryClient.invalidateQueries({ queryKey: ["budgets"] });
+			setOpen(false);
+		},
+		onError: (error) => {
+			console.log(error);
+		},
+	});
+
 	const handleDeleteBudget = () => {
-		console.log(budget);
+		mutate();
 	};
 
 	return (
@@ -43,7 +58,7 @@ const Table = ({ data }: { data: Budget[] }) => {
 				<tbody>
 					{data.map((item) => (
 						<tr key={item.id} className={classes?.table_row}>
-							<td>{item.date}</td>
+							<td>{item.period_month}</td>
 							<td>
 								<div className={classes?.category}>
 									<div className={classes?.category}>
@@ -51,32 +66,26 @@ const Table = ({ data }: { data: Budget[] }) => {
 											<img
 												src={
 													AppConstants?.category?.[
-														item.category as keyof typeof AppConstants.category
+													item.category_icon as keyof typeof AppConstants.category
 													]
 												}
-												alt={item.category}
+												alt={item.category_icon}
 												className={classes?.icon}
 											/>
 										</div>
-										<span className={classes?.category_name}>
-											{
-												AppConstants?.categoryMap?.[
-													item.category as keyof typeof AppConstants.categoryMap
-												]
-											}
-										</span>
+										<span className={classes?.category_name}>{item.category_name}</span>
 									</div>
 								</div>
 							</td>
-							<td>₹{item.limit}</td>
-							<td>₹{item.spent}</td>
+							<td>₹{item.limit_amount}</td>
+							<td>₹{item.spent_amount}</td>
 							<td>
-								{item.limit - item.spent > 0
-									? `₹${item.limit - item.spent}`
-									: `-₹${(item.limit - item.spent) * -1}`}
+								{item.limit_amount - item.spent_amount > 0
+									? `₹${item.limit_amount - item.spent_amount}`
+									: `-₹${(item.limit_amount - item.spent_amount) * -1}`}
 							</td>
 							<td>
-								<ProgressBar filled={(item.spent / item.limit) * 100} />
+								<ProgressBar filled={item.used_percent} />
 							</td>
 
 							<td className={classes?.actions}>
@@ -102,6 +111,7 @@ const Table = ({ data }: { data: Budget[] }) => {
 					description="Are you sure you want to delete this budget?"
 					setOpen={setDeleteOpen}
 					onDelete={handleDeleteBudget}
+					isPending={isPending}
 				/>
 			)}
 		</div>

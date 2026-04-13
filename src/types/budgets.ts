@@ -11,11 +11,14 @@ export type StatsTypes = {
 
 export type Budget = {
 	id: string;
-	limit: number;
-	spent: number;
-	category: string;
-	date: string;
-	note?: string;
+	limit_amount: number;
+	spent_amount: number;
+	category_id: string;
+	period_month: string;
+	notes?: string;
+	category_icon: string;
+	category_name: string;
+	used_percent: number;
 };
 
 export type BudgetStore = {

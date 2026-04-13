@@ -2,51 +2,26 @@ import AppConstants from "@/utils/AppConstants";
 import classes from "./stats.module.css";
 import { useQuery } from "@tanstack/react-query";
 import { getStats } from "@/services/transactionService";
-// const data = [
-// 	{
-// 		id: 1,
-// 		title: "Total Balance",
-// 		amount: 24011,
-// 		change_amount: 24011,
-// 		change_percentage: 100,
-// 		trend: "up",
-// 	},
-// 	{
-// 		id: 2,
-// 		title: "Total Income",
-// 		amount: 54000,
-// 		change_percentage: 100,
-// 		trend: "up",
-// 	},
-// 	{
-// 		id: 3,
-// 		title: "Total Expense",
-// 		amount: 29989,
-// 		change_percentage: 100,
-// 		trend: "down",
-// 	},
-// 	{
-// 		id: 4,
-// 		title: "Savings Rate",
-// 		percentage: 44,
-// 		change_percentage: 100,
-// 		trend: "up",
-// 	},
-// ];
+import StatsCardSkeleton from "@/Components/common/Skeleton/StatsCardSkeleton/StatsCardSkeleton";
 
 const Status = () => {
-	const { data, isLoading, error } = useQuery({
+	const { data, isLoading } = useQuery({
 		queryKey: ["status"],
 		queryFn: async () => {
 			const data = await getStats();
 			return data;
 		},
-		staleTime: 1000 * 60 * 60, // 1 hour
+		staleTime: 1000 * 60 * 60, 
 	});
 
-	console.log(data);
-
 	const { savings_rate, total_balance, total_expense, total_income } = data || {};
+
+	if (isLoading) {
+		return (
+			<StatsCardSkeleton />
+		);
+	}
+
 	return (
 		<section className={classes?.status_sec}>
 			<ul className={classes?.status_list}>
@@ -83,7 +58,7 @@ const Status = () => {
 					</span>
 				</li>
 				<li className={classes?.status_item}>
-					<span className={classes?.title}>Total Balance</span>
+					<span className={classes?.title}>Total Expense</span>
 					<strong className={classes?.value}>₹{total_expense?.amount.toLocaleString("en-IN")}</strong>
 					<span className={`${classes?.change_desc} ${total_expense?.trend === "down" ? classes?.drop : ""}`}>
 						{total_expense?.trend === "up" ? "+" : "-"}
@@ -99,7 +74,7 @@ const Status = () => {
 					</span>
 				</li>
 				<li className={classes?.status_item}>
-					<span className={classes?.title}>Total Balance</span>
+					<span className={classes?.title}>Savings Rate</span>
 					<strong className={classes?.value}>{savings_rate?.percentage}%</strong>
 					<span className={`${classes?.change_desc} ${savings_rate?.trend === "down" ? classes?.drop : ""}`}>
 						{savings_rate?.trend === "up" ? "+" : "-"}

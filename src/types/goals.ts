@@ -1,14 +1,17 @@
 import type { FilterType } from "./transactions";
 
 export type Goal = {
-	id: string;
-	title: string;
-	target: number;
-	saved: number;
-	category: string;
+	goal_id: string;
+	goal_name: string;
+	target_amount: number;
+	saved_amount: number;
+	category_id: string;
 	start_date: string;
 	end_date: string;
 	status: string;
+	category_icon: string;
+	category_name: string;
+	progress_percent: number;
 };
 
 export type GoalsStore = {

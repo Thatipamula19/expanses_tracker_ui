@@ -1,14 +1,5 @@
 import { Cell, Legend, Pie, PieChart, type PieLabelRenderProps, ResponsiveContainer, Tooltip } from "recharts";
 
-const data = [
-	{ name: "Food & Dining", value: 24 },
-	{ name: "Transport", value: 16 },
-	{ name: "Shopping", value: 20 },
-	{ name: "Bills & Utilities", value: 14 },
-	{ name: "Entertainment", value: 10 },
-	{ name: "Savings & Investments", value: 16 },
-];
-
 const RADIAN = Math.PI / 180;
 const COLORS = ["#2ecc71", "#3498db", "#f39c12", "#e74c3c", "#9b59b6", "#16a085"];
 
@@ -35,7 +26,7 @@ const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, per
 	);
 };
 
-const DynamicPieChart = ({ isAnimationActive = true }: { isAnimationActive?: boolean }) => {
+const DynamicPieChart = ({ isAnimationActive = true, data = [] }: { isAnimationActive?: boolean; data: any[] }) => {
 	return (
 		<ResponsiveContainer width="100%" height={300}>
 			<PieChart>
@@ -47,7 +38,7 @@ const DynamicPieChart = ({ isAnimationActive = true }: { isAnimationActive?: boo
 					label={renderCustomizedLabel}
 					outerRadius={130}
 					fill="#8884d8"
-					dataKey="value"
+					dataKey="percentage"
 					isAnimationActive={isAnimationActive}>
 					{data.map((_, index) => (
 						<Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
