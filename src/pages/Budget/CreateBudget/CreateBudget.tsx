@@ -36,9 +36,9 @@ const CreateBudget = ({ setOpen, type, budget }: Props) => {
 		mutationFn: (data: Budget) => (type === "Add" ? addBudget(data) : updateBudget(data)),
 
 		onSuccess: () => {
-			queryClient.invalidateQueries({
-				queryKey: ["budgets"],
-			});
+			queryClient.invalidateQueries({ queryKey: ["budgets"], exact: false });
+			queryClient.invalidateQueries({ queryKey: ["status"], exact: false });
+			queryClient.invalidateQueries({ queryKey: ["budgets-insights"], exact: false });
 			setOpen(false);
 		},
 	});

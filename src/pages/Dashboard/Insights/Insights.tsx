@@ -7,12 +7,11 @@ import { getOverview } from "@/services/transactionService";
 import { LineChartSkeleton, PieChartSkeleton } from "@/Components/common/Skeleton/ChartsSkeleton/ChartsSkeleton";
 
 const Insights = () => {
-
 	const { data, error, isLoading } = useQuery({
 		queryKey: ["transactions-insights"],
 		queryFn: async () => {
 			const data = await getOverview({
-				trend_months: 6
+				trend_months: 6,
 			});
 
 			if (error) {
@@ -21,7 +20,9 @@ const Insights = () => {
 
 			return data;
 		},
-		staleTime: 1000 * 60 * 5,
+		staleTime: 0,
+		refetchOnMount: "always",
+		refetchOnWindowFocus: true,
 	});
 
 	return (
@@ -34,14 +35,21 @@ const Insights = () => {
 						{/* <span>Monthly trend</span> */}
 					</div>
 
-					{ isLoading ? <LineChartSkeleton /> : <DynamicLineChart data={data?.income_vs_expense?.data || []} chartKeys={data?.income_vs_expense?.chart_keys} />}
+					{isLoading ? (
+						<LineChartSkeleton />
+					) : (
+						<DynamicLineChart
+							data={data?.income_vs_expense?.data || []}
+							chartKeys={data?.income_vs_expense?.chart_keys}
+						/>
+					)}
 				</div>
 				<div className={classes.card}>
 					<div className={classes.card_header}>
 						<strong>Expense Breakdown</strong>
 					</div>
 
-					{ isLoading ? <PieChartSkeleton /> : <DynamicPieChart data={data?.expense_breakdown?.data || []} />}
+					{isLoading ? <PieChartSkeleton /> : <DynamicPieChart data={data?.expense_breakdown?.data || []} />}
 				</div>
 			</div>
 		</section>

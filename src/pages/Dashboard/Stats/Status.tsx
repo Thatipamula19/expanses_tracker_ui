@@ -6,20 +6,20 @@ import StatsCardSkeleton from "@/Components/common/Skeleton/StatsCardSkeleton/St
 
 const Status = () => {
 	const { data, isLoading } = useQuery({
-		queryKey: ["status"],
+		queryKey: ["dashboard-status"],
 		queryFn: async () => {
 			const data = await getStats();
 			return data;
 		},
-		staleTime: 1000 * 60 * 60, 
+		staleTime: 0,
+		refetchOnMount: "always",
+		refetchOnWindowFocus: true,
 	});
 
 	const { savings_rate, total_balance, total_expense, total_income } = data || {};
 
 	if (isLoading) {
-		return (
-			<StatsCardSkeleton />
-		);
+		return <StatsCardSkeleton />;
 	}
 
 	return (
@@ -30,7 +30,10 @@ const Status = () => {
 					<strong className={classes?.value}>₹{total_balance?.amount.toLocaleString("en-IN")}</strong>
 					<span className={`${classes?.change_desc} ${total_balance?.trend === "down" ? classes?.drop : ""}`}>
 						{total_balance?.trend === "up" ? "+" : "-"}₹
-						{(total_balance?.change_amount * (total_balance?.trend === "up" ? 1 : -1)).toLocaleString("en-IN")} this month{" "}
+						{(total_balance?.change_amount * (total_balance?.trend === "up" ? 1 : -1)).toLocaleString(
+							"en-IN",
+						)}{" "}
+						this month{" "}
 						<img
 							src={
 								total_balance?.trend === "up"
@@ -46,7 +49,10 @@ const Status = () => {
 					<strong className={classes?.value}>₹{total_income?.amount.toLocaleString("en-IN")}</strong>
 					<span className={`${classes?.change_desc} ${total_income?.trend === "down" ? classes?.drop : ""}`}>
 						{total_income?.trend === "up" ? "+" : "-"}₹
-						{(total_income?.change_percentage * (total_income?.trend === "up" ? 1 : -1)).toLocaleString("en-IN")} from last month{" "}
+						{(total_income?.change_percentage * (total_income?.trend === "up" ? 1 : -1)).toLocaleString(
+							"en-IN",
+						)}{" "}
+						from last month{" "}
 						<img
 							src={
 								total_income?.trend === "up"
