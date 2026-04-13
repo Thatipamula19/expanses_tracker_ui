@@ -56,7 +56,7 @@ const Signin = () => {
 		},
 
 		onError: (error: any) => {
-			toast.error(error?.err_msg);
+			toast.error(error?.err_msg || error?.error);
 		},
 	});
 

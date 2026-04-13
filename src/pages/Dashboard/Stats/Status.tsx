@@ -58,7 +58,7 @@ const Status = () => {
 					</span>
 				</li>
 				<li className={classes?.status_item}>
-					<span className={classes?.title}>Total Balance</span>
+					<span className={classes?.title}>Total Expense</span>
 					<strong className={classes?.value}>₹{total_expense?.amount.toLocaleString("en-IN")}</strong>
 					<span className={`${classes?.change_desc} ${total_expense?.trend === "down" ? classes?.drop : ""}`}>
 						{total_expense?.trend === "up" ? "+" : "-"}
@@ -74,7 +74,7 @@ const Status = () => {
 					</span>
 				</li>
 				<li className={classes?.status_item}>
-					<span className={classes?.title}>Total Balance</span>
+					<span className={classes?.title}>Savings Rate</span>
 					<strong className={classes?.value}>{savings_rate?.percentage}%</strong>
 					<span className={`${classes?.change_desc} ${savings_rate?.trend === "down" ? classes?.drop : ""}`}>
 						{savings_rate?.trend === "up" ? "+" : "-"}
