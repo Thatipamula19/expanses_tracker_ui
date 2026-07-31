@@ -70,7 +70,7 @@ const Signin = () => {
 	return (
 		<AuthLayout>
 			<div className={classes?.signin_left}>
-				<h1 className={classes?.signin_title}>Sign in to FinTrack</h1>
+				<h1 className={classes?.signin_title}>Sign in to FinTrack Build Test</h1>
 				{/* <img src={googleIcon} alt="google icon" className={classes?.signin_google} />
 				<span className={classes?.signin_or}>or use your account</span> */}
 				<form className={classes?.signin_form} onSubmit={handleSubmit(handleSignin)}>
